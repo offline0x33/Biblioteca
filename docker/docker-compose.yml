@@ -1,0 +1,48 @@
+version: "2"
+
+services:
+  app:
+    container_name: "app"
+    image: "jboss/wildfly-admin:latest"
+    environment:
+      - WILDFLY_USER=admin
+      - WILDFLY_PASS=adminPassword
+      - DB_NAME=biblioteca
+      - DB_USER=mysql
+      - DB_PASS=mysql
+      - DB_URI=db:3306
+    depends_on:
+      - db
+      - db_seeder
+    ports:
+      - "8080:8080" # application
+      - "9990:9990" # admin console
+      
+  db:
+    container_name: "db"
+    image: "mysql:latest"
+    environment:
+      - MYSQL_DATABASE=biblioteca
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=supersecret
+    volumes:
+      - ./workdir/mysql/init/:/docker-entrypoint-initdb.d/ # init database
+      - ./workdir/mysql/data/:/var/lib/mysql/ # data storage
+      - ./workdir/wildfly:/wildfly/ # wildfly
+    ports:
+      - "3306:3306"
+
+  db_seeder:
+    image: mysql:latest
+    volumes:
+      - ./biblioteca.sql:/biblioteca.sql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root -psupersecret --host=db --port=3306 biblioteca < /biblioteca.sql && exit"] 
+    depends_on:
+      - db
+
+networks:
+  default:
+    driver: bridge
