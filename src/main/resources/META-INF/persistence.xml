@@ -13,7 +13,7 @@
                 <property name="javax.persistence.jdbc.password" value="mysql"/>
                 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             -->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="hibernate.hbm2ddl.auto" value="none"/>

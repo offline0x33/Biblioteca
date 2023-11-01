@@ -495,7 +495,6 @@
             <server name="default-server">
                 <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true"/>
                 <https-listener name="https" socket-binding="https" ssl-context="applicationSSC" enable-http2="true"/>
-<!--                 <http-listener name="1099" socket-binding="remoting"/>-->
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
                     <http-invoker http-authentication-factory="application-http-authentication"/>
@@ -539,7 +538,6 @@
         <socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
         <socket-binding name="http" port="${jboss.http.port:8080}"/>
         <socket-binding name="https" port="${jboss.https.port:8443}"/>
-        <!--<socket-binding name="remoting" port="${jboss.http.port:1099}"/>-->
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9993}"/>
         <socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>
