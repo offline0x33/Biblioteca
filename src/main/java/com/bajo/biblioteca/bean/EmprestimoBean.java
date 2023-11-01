@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.mavenproject1.bean;
+package com.bajo.biblioteca.bean;
 
-import com.bajo.mavenproject1.bean.impl.EmprestimoRemote;
-import com.bajo.mavenproject1.dao.EmprestimoDAO;
-import com.bajo.mavenproject1.model.Emprestimo;
+import com.bajo.biblioteca.bean.impl.EmprestimoRemote;
+import com.bajo.biblioteca.dao.EmprestimoDAO;
+import com.bajo.biblioteca.model.Emprestimo;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

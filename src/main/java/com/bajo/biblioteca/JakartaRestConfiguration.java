@@ -1,4 +1,4 @@
-package com.bajo.mavenproject1;
+package com.bajo.biblioteca;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

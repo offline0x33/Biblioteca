@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.mavenproject1.bean.impl;
+package com.bajo.biblioteca.bean.impl;
 
-import com.bajo.mavenproject1.model.Emprestimo;
+import com.bajo.biblioteca.model.Pessoa;
 import jakarta.ejb.Remote;
 
 /**
@@ -12,14 +12,12 @@ import jakarta.ejb.Remote;
  * @author bajinho
  */
 
-
 @Remote
-public interface EmprestimoRemote {
+public interface PessoaRemote {
 
-    public Emprestimo salvar(Emprestimo emprestimo)
-            throws Exception;
+    public Pessoa salvar(Pessoa pessoa) throws Exception;
 
     public void excluir(Long id);
 
-    public Emprestimo consultarPorId(Long id);
+    public Pessoa consultarPorId(Long id);
 }

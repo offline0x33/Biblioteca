@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.mavenproject1.dao;
+package com.bajo.biblioteca.dao;
 
-import com.bajo.mavenproject1.model.Livro;
+import com.bajo.biblioteca.model.Livro;
 import jakarta.persistence.EntityManager;
 
 /**

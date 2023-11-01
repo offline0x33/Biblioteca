@@ -1,4 +1,4 @@
-package com.bajo.mavenproject1.resources;
+package com.bajo.biblioteca.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
