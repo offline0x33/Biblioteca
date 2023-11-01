@@ -1,4 +1,4 @@
 # Biblioteca
-# Biblioteca
-# Biblioteca
-# Biblioteca
+inicio linux:
+
+start.sh
