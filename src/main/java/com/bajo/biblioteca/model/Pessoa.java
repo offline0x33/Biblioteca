@@ -40,12 +40,7 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(Long id) {
-        this.id = id;
-    }
-
-    public Pessoa(Long id, String nome) {
-        this.id = id;
+    public Pessoa(String nome) {
         this.nome = nome;
     }
 
