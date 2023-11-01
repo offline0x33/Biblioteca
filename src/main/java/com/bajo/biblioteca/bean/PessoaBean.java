@@ -19,11 +19,13 @@ import java.util.logging.Logger;
  */
 @Stateless
 public class PessoaBean implements PessoaRemote {
-    
-    private static final Logger logger
-            = Logger.getLogger("com.bajo.mavenproject1.bean.LivroBean");
 
-    @PersistenceContext(unitName = "samplePU")
+    private static final Logger logger
+            = Logger.getLogger("com.bajo.mavenproject1.bean.PessoaBean");
+
+//    @PersistenceContext(unitName = "bibliotecaPU")
+//    private EntityManager em;
+    @PersistenceContext
     private EntityManager em;
 
     @Override
