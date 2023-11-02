@@ -99,7 +99,7 @@ public class PessoaDAO {
     public List<Pessoa> consultarPorNome(String name) {
         return (List<Pessoa>) entityManager.createQuery(
         "SELECT c FROM Pessoa c WHERE c.nome LIKE :custName")
-        .setParameter("custName", name)
+        .setParameter("custName", "%"+name+"%")
         .getResultList();
     }
 }
