@@ -10,6 +10,7 @@ import com.bajo.biblioteca.model.Pessoa;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
 public class PessoaBean implements PessoaRemote {
 
     private static final Logger logger
-            = Logger.getLogger("com.bajo.mavenproject1.bean.PessoaBean");
+            = Logger.getLogger("com.bajo.biblioteca.bean.PessoaBean");
 
 //    @PersistenceContext(unitName = "bibliotecaPU")
 //    private EntityManager em;
@@ -47,5 +48,12 @@ public class PessoaBean implements PessoaRemote {
         PessoaDAO dao = new PessoaDAO(em);
         logger.log(Level.INFO, "Consultar pessoa por Id: ", dao.consultarPorId(id));
         return dao.consultarPorId(id);
+    }
+
+    @Override
+    public List<Pessoa> consultarporNome(String name) {
+        PessoaDAO dao = new PessoaDAO(em);
+        logger.log(Level.INFO, "Consultar pessoa por nome: ", dao.consultarPorNome(name));
+        return dao.consultarPorNome(name);
     }
 }

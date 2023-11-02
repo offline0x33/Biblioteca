@@ -6,6 +6,7 @@ package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Pessoa;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 
 /**
  *
@@ -86,5 +87,19 @@ public class PessoaDAO {
      */
     public Pessoa consultarPorId(Long id) {
         return entityManager.find(Pessoa.class, id);
+    }
+
+    /**
+     * Consulta a pessoa por Nome.
+     * 
+     * @param name
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public List<Pessoa> consultarPorNome(String name) {
+        return (List<Pessoa>) entityManager.createQuery(
+        "SELECT c FROM Customer c WHERE c.name LIKE :custName")
+        .setParameter("custName", name)
+        .getResultList();
     }
 }
