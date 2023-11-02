@@ -98,7 +98,7 @@ public class PessoaDAO {
     @SuppressWarnings("unchecked")
     public List<Pessoa> consultarPorNome(String name) {
         return (List<Pessoa>) entityManager.createQuery(
-        "SELECT c FROM Customer c WHERE c.name LIKE :custName")
+        "SELECT c FROM Pessoa c WHERE c.name LIKE :custName")
         .setParameter("custName", name)
         .getResultList();
     }
