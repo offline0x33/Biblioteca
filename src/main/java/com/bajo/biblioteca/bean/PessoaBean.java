@@ -51,7 +51,7 @@ public class PessoaBean implements PessoaRemote {
     }
 
     @Override
-    public List<Pessoa> consultarporNome(String name) {
+    public List<Pessoa> consultarPorNome(String name) {
         PessoaDAO dao = new PessoaDAO(em);
         logger.log(Level.INFO, "Consultar pessoa por nome: ", dao.consultarPorNome(name));
         return dao.consultarPorNome(name);

@@ -22,5 +22,5 @@ public interface PessoaRemote {
 
     public Pessoa consultarPorId(Long id);
     
-    public List<Pessoa> consultarporNome(String nome);
+    public List<Pessoa> consultarPorNome(String nome);
 }
