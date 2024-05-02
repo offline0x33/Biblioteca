@@ -6,6 +6,7 @@ package com.bajo.biblioteca.bean.impl;
 
 import com.bajo.biblioteca.model.Livro;
 import jakarta.ejb.Remote;
+import java.util.List;
 
 /**
  *
@@ -20,4 +21,6 @@ public interface LivroRemote {
     public void excluir(Long id);
 
     public Livro consultarPorId(Long id);
+    
+    public List<Livro> consultarPorTitulo(String titulo);
 }

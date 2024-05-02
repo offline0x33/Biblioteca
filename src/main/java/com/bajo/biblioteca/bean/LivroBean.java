@@ -10,6 +10,7 @@ import com.bajo.biblioteca.model.Livro;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,5 +46,12 @@ public class LivroBean implements LivroRemote {
         LivroDAO dao = new LivroDAO(em);
         logger.log(Level.INFO, "Consultar livro por Id: ", dao.consultarPorId(id));
         return dao.consultarPorId(id);
+    }
+    
+    @Override
+    public List<Livro> consultarPorTitulo(String titulo) {
+        LivroDAO dao = new LivroDAO(em);
+        logger.log(Level.INFO, "Consultar livro por titulo: ", dao.consultarPorTitulo(titulo));
+        return dao.consultarPorTitulo(titulo);
     }
 }
