@@ -6,7 +6,7 @@ services:
     image: "jboss/wildfly-admin:latest"
     environment:
       - WILDFLY_USER=admin
-      - WILDFLY_PASS=adminPassword
+      - WILDFLY_PASS=Admin#70365
       - DB_NAME=biblioteca
       - DB_USER=mysql
       - DB_PASS=mysql

@@ -1,5 +1,5 @@
 # By default, build on JDK 17 on CentOS 7.
-ARG jdk=20
+ARG jdk=17
 # Red Hat UBI 9 (ubi9-minimal) should be used on JDK 20 and later.
 ARG dist=centos7
 #FROM eclipse-temurin:${jdk}-${dist}
