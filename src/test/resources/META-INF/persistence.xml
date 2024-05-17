@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
   <!-- Define Persistence Unit -->
-  <persistence-unit name="bibliotecaPU" transaction-type="JTA">
+  <persistence-unit name="bibliotecaTestPU" transaction-type="JTA">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>java:jboss/MySqlDS</jta-data-source>
     <!--<class>br.com.test.User</class>-->
     <class>com.bajo.biblioteca.model.Livro</class>
     <class>com.bajo.biblioteca.model.Emprestimo</class>
     <class>com.bajo.biblioteca.model.Pessoa</class>
-    <class>com.bajo.biblioteca.model.view.EmprestimoView</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

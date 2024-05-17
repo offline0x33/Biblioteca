@@ -5,7 +5,9 @@
 package com.bajo.biblioteca.bean.impl;
 
 import com.bajo.biblioteca.model.Emprestimo;
+import com.bajo.biblioteca.model.view.EmprestimoView;
 import jakarta.ejb.Remote;
+import java.util.List;
 
 /**
  *
@@ -22,4 +24,8 @@ public interface EmprestimoRemote {
     public void excluir(Long id);
 
     public Emprestimo consultarPorId(Long id);
+    
+    public List<EmprestimoView> consultarPorTitulo(String titulo);
+    
+    public List<EmprestimoView> consultarPorNome(String nome);
 }

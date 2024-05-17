@@ -5,7 +5,10 @@
 package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Emprestimo;
+import com.bajo.biblioteca.model.view.EmprestimoView;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import java.util.List;
 
 /**
  *
@@ -40,8 +43,8 @@ public class EmprestimoDAO {
     public Emprestimo salvar(Emprestimo emprestimo)
             throws Exception {
         System.out.println("Emprestando o livro "
-                + emprestimo.getLivro().getTitulo()
-                + " para a pessoa " + emprestimo.getPessoa().getNome());
+                + emprestimo.getLivro_id()
+                + " para a pessoa " + emprestimo.getPessoa_id());
 
         /* Verifica se o emprestimo ainda não está salvo no 
       banco de dados. */
@@ -54,7 +57,7 @@ public class EmprestimoDAO {
                 /* Se o emprestimo não está no estado managed 
           verifica se ele existe na base. */
                 if (consultarPorId(emprestimo.getId()) == null) {
-                    throw new Exception("Livro não existe!");
+                    throw new Exception("Emprestimo não existe!");
                 }
             }
             /* Faz uma atualização do empréstimo. */
@@ -90,5 +93,38 @@ public class EmprestimoDAO {
      */
     public Emprestimo consultarPorId(Long id) {
         return entityManager.find(Emprestimo.class, id);
+    }
+
+    /**
+     * Consulta a Emprestimo por Nome.
+     *
+     * @param nome
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public List<EmprestimoView> consultarPorNome(String nome) {
+        TypedQuery<EmprestimoView> query
+                = entityManager.createNamedQuery("EmprestimoView.findByNome", EmprestimoView.class);
+        query.setParameter("nome", "%" + nome + "%");
+        List<EmprestimoView> results = query.getResultList();
+        return results;
+    }
+
+    /**
+     * Consulta a Emprestimo por Titulo.
+     *
+     * @param titulo
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public List<EmprestimoView> consultarPorTitulo(String titulo) {
+        TypedQuery<EmprestimoView> query
+                = entityManager.createNamedQuery("Country.findAll", EmprestimoView.class);
+        List<EmprestimoView> results = query.getResultList();
+        return results;
+//        return (List<EmprestimoView>) entityManager.createQuery(
+//        "SELECT e FROM EmprestimoView e WHERE e.nome LIKE :custName")
+//        .setParameter("custTitulo", "%"+titulo+"%")
+//        .getResultList();
     }
 }

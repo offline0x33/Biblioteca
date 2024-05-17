@@ -26,12 +26,25 @@ DROP TABLE IF EXISTS `biblioteca`.`emprestimo` ;
 
 CREATE TABLE IF NOT EXISTS `biblioteca`.`emprestimo` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `livro_id` INT NOT NULL,
-  `pessoa_id` INT NOT NULL,
   `dataemprestimo` DATE NULL DEFAULT NULL,
   `datadevolucao` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  `livro_id` INT NOT NULL,
+  `pessoa_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_emprestimo_livro_idx` (`livro_id` ASC) VISIBLE,
+  INDEX `fk_emprestimo_pessoa1_idx` (`pessoa_id` ASC) VISIBLE,
+  CONSTRAINT `fk_emprestimo_livro`
+    FOREIGN KEY (`livro_id`)
+    REFERENCES `biblioteca`.`livro` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_emprestimo_pessoa`
+    FOREIGN KEY (`pessoa_id`)
+    REFERENCES `biblioteca`.`pessoa` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -48,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`livro` (
   `emprestado` INT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -62,10 +76,54 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`pessoa` (
   `nome` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 37
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Insert in Tables`
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Pessoa
+-- -----------------------------------------------------
+INSERT INTO `biblioteca`.`pessoa` (`nome`)
+VALUES 
+    ("bajinho"),
+    ("Maria");
+
+-- -----------------------------------------------------
+-- Livro
+-- -----------------------------------------------------
+INSERT INTO `biblioteca`.`livro` (`titulo`, `autor`, `emprestado`)
+VALUES ("Java Para Leigos", " Barry Burd", 1);
+
+-- -----------------------------------------------------
+-- Emprestimo
+-- -----------------------------------------------------
+INSERT INTO `biblioteca`.`emprestimo` (`dataemprestimo`, `livro_id`, `pessoa_id`)
+VALUES ('2024-05-11', 1, 1);
+
+-- -----------------------------------------------------
+-- Table `biblioteca`.`emprestimo_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `biblioteca`.`emprestimo_view` ;
+
+CREATE VIEW `biblioteca`.`emprestimo_view` 
+AS select 
+    `biblioteca`.`emprestimo`.`id` AS `id`,
+    `biblioteca`.`emprestimo`.`livro_id` AS `livro_id`,
+    `biblioteca`.`emprestimo`.`pessoa_id` AS `pessoa_id`,
+    `biblioteca`.`emprestimo`.`dataemprestimo` AS `dataemprestimo`,
+    `biblioteca`.`emprestimo`.`datadevolucao` AS `datadevolucao`,
+    `biblioteca`.`pessoa`.`nome` AS `nome`,
+    `biblioteca`.`livro`.`titulo` AS `titulo`,
+    `biblioteca`.`livro`.`autor` AS `autor` 
+from 
+    ((`biblioteca`.`emprestimo` join `biblioteca`.`pessoa`) join `biblioteca`.`livro`) 
+where 
+    ((`biblioteca`.`emprestimo`.`pessoa_id` = `biblioteca`.`pessoa`.`id`) 
+and (`biblioteca`.`emprestimo`.`livro_id` = `biblioteca`.`livro`.`id`));

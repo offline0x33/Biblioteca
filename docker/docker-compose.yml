@@ -34,11 +34,11 @@ services:
       - "3306:3306"
 
   db_seeder:
-    image: mysql:latest
+    image: "mysql:latest"
     volumes:
       - ./biblioteca.sql:/biblioteca.sql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      - MYSQL_ALLOW_EMPTY_PASSWORD= "true"
     entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root -psupersecret --host=db --port=3306 biblioteca < /biblioteca.sql && exit"] 
     depends_on:
       - db

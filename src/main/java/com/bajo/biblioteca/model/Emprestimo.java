@@ -3,15 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.bajo.biblioteca.model;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-//import jakarta.persistence.NamedQueries;
-//import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -20,59 +18,36 @@ import java.util.Date;
 
 /**
  *
- * @author Suporte Romtech
+ * @author bajinho
  */
 @Entity
 @Table(name = "emprestimo")
-//@NamedQueries({
-//    @NamedQuery(name = "Emprestimo_1.findAll", query = "SELECT e FROM Emprestimo_1 e"),
-//    @NamedQuery(name = "Emprestimo_1.findById", query = "SELECT e FROM Emprestimo_1 e WHERE e.id = :id"),
-//    @NamedQuery(name = "Emprestimo_1.findByLivroId", query = "SELECT e FROM Emprestimo_1 e WHERE e.livroId = :livroId"),
-//    @NamedQuery(name = "Emprestimo_1.findByPessoaId", query = "SELECT e FROM Emprestimo_1 e WHERE e.pessoaId = :pessoaId"),
-//    @NamedQuery(name = "Emprestimo_1.findByDataemprestimo", query = "SELECT e FROM Emprestimo_1 e WHERE e.dataemprestimo = :dataemprestimo"),
-//    @NamedQuery(name = "Emprestimo_1.findByDatadevolucao", query = "SELECT e FROM Emprestimo_1 e WHERE e.datadevolucao = :datadevolucao")})
 public class Emprestimo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "dataemprestimo")
-    private String dataemprestimo;
+    @Temporal(TemporalType.DATE)
+    private Date dataemprestimo;
     @Column(name = "datadevolucao")
-    private String datadevolucao;
-    @ManyToOne
-    private Livro livro;
-    @ManyToOne
-    private Pessoa pessoa;
     @Temporal(TemporalType.DATE)
-    private Date dataEmprestimo;
-    @Temporal(TemporalType.DATE)
-    private Date dataDevolucao;
+    private Date datadevolucao;
+
+    @Column(name = "livro_id")
+    private Long livro_id;
+
+    @Column(name = "pessoa_id")
+    private Long pessoa_id;
 
     public Emprestimo() {
     }
 
     public Emprestimo(Long id) {
         this.id = id;
-    }
-    
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
-
-    public Date getDataEmprestimo() {
-        return dataEmprestimo;
-    }
-
-    public void setDataEmprestimo(Date dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
     }
 
     public Long getId() {
@@ -83,36 +58,36 @@ public class Emprestimo implements Serializable {
         this.id = id;
     }
 
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public String getDataemprestimo() {
+    public Date getDataemprestimo() {
         return dataemprestimo;
     }
 
-    public void setDataemprestimo(String dataemprestimo) {
+    public void setDataemprestimo(Date dataemprestimo) {
         this.dataemprestimo = dataemprestimo;
     }
 
-    public String getDatadevolucao() {
+    public Date getDatadevolucao() {
         return datadevolucao;
     }
 
-    public void setDatadevolucao(String datadevolucao) {
+    public void setDatadevolucao(Date datadevolucao) {
         this.datadevolucao = datadevolucao;
+    }
+
+    public Long getLivro_id() {
+        return livro_id;
+    }
+
+    public void setLivro_id(Long livro_id) {
+        this.livro_id = livro_id;
+    }
+
+    public Long getPessoa_id() {
+        return pessoa_id;
+    }
+
+    public void setPessoa_id(Long pessoa_id) {
+        this.pessoa_id = pessoa_id;
     }
 
     @Override
@@ -129,12 +104,15 @@ public class Emprestimo implements Serializable {
             return false;
         }
         Emprestimo other = (Emprestimo) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "com.mycompany.emprestimoejb.modelo.Emprestimo_1[ id=" + id + " ]";
+        return "com.bajo.biblioteca.model.Emprestimo[ id=" + id + " ]";
     }
 
 }

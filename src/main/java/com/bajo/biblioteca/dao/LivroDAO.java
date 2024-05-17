@@ -99,7 +99,7 @@ public class LivroDAO {
     @SuppressWarnings("unchecked")
     public List<Livro> consultarPorTitulo(String titulo) {
         return (List<Livro>) entityManager.createQuery(
-        "SELECT c FROM Livro c WHERE c.titulo LIKE :custTitulo")
+        "SELECT l FROM Livro l WHERE l.titulo LIKE :custTitulo")
         .setParameter("custTitulo", "%"+titulo+"%")
         .getResultList();
     }

@@ -4,43 +4,53 @@
  */
 package com.bajo.biblioteca.model;
 
-import java.io.Serializable;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.NamedQueries;
-//import jakarta.persistence.NamedQuery;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import java.io.Serializable;
+
 
 /**
  *
- * @author Suporte Romtech
+ * @author bajinho
  */
 @Entity
-@Table(name = "pessoa")
-//@NamedQueries({
-//    @NamedQuery(name = "Pessoa_1.findAll", query = "SELECT p FROM Pessoa_1 p"),
-//    @NamedQuery(name = "Pessoa_1.findById", query = "SELECT p FROM Pessoa_1 p WHERE p.id = :id"),
-//    @NamedQuery(name = "Pessoa_1.findByNome", query = "SELECT p FROM Pessoa_1 p WHERE p.nome = :nome")})
+@Table(name = "pessoa", catalog = "biblioteca", schema = "")
+@NamedQueries({
+    @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
+    @NamedQuery(name = "Pessoa.findById", query = "SELECT p FROM Pessoa p WHERE p.id = :id"),    
+    @NamedQuery(name = "Pessoa.findByNome", query = "SELECT p FROM Pessoa p WHERE p.nome LIKE :nome")})
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nome")
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
     public Pessoa() {
     }
 
-    public Pessoa(String nome) {
+    public Pessoa(Long id) {
+        this.id = id;
+    }
+
+    public Pessoa(Long id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
@@ -74,12 +84,15 @@ public class Pessoa implements Serializable {
             return false;
         }
         Pessoa other = (Pessoa) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "com.mycompany.emprestimoejb.modelo.Pessoa_1[ id=" + id + " ]";
+        return "com.bajo.biblioteca.model.Pessoa[ id=" + id + " ]";
     }
-    
+
 }

@@ -10,60 +10,59 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.NamedQueries;
-//import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
  *
- * @author Suporte Romtech
+ * @author bajinho
  */
 @Entity
 @Table(name = "livro")
-//@NamedQueries({
-//    @NamedQuery(name = "Livro_1.findAll", query = "SELECT l FROM Livro_1 l"),
-//    @NamedQuery(name = "Livro_1.findById", query = "SELECT l FROM Livro_1 l WHERE l.id = :id"),
-//    @NamedQuery(name = "Livro_1.findByTitulo", query = "SELECT l FROM Livro_1 l WHERE l.titulo = :titulo"),
-//    @NamedQuery(name = "Livro_1.findByAutor", query = "SELECT l FROM Livro_1 l WHERE l.autor = :autor"),
-//    @NamedQuery(name = "Livro_1.findByEmprestado", query = "SELECT l FROM Livro_1 l WHERE l.emprestado = :emprestado")})
 public class Livro implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Basic(optional = false)
-    @Column(name = "titulo")
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
     @Basic(optional = false)
-    @Column(name = "autor")
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "autor", nullable = false, length = 100)
     private String autor;
     @Basic(optional = false)
-    @Column(name = "emprestado")
+    @NotNull
+    @Column(name = "emprestado", nullable = false)
     private int emprestado;
 
     public Livro() {
     }
 
-    public Livro(Integer id) {
+    public Livro(Long id) {
         this.id = id;
     }
 
-    public Livro(Integer id, String titulo, String autor, int emprestado) {
+    public Livro(Long id, String titulo, String autor, int emprestado) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.emprestado = emprestado;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -105,12 +104,15 @@ public class Livro implements Serializable {
             return false;
         }
         Livro other = (Livro) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "com.mycompany.emprestimoejb.modelo.Livro_1[ id=" + id + " ]";
+        return "com.bajo.biblioteca.model.Livro[ id=" + id + " ]";
     }
-    
+
 }
