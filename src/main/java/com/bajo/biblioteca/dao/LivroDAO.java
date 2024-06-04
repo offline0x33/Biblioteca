@@ -5,7 +5,9 @@
 package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Livro;
+import com.bajo.biblioteca.model.view.EmprestimoView;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -89,18 +91,16 @@ public class LivroDAO {
     public Livro consultarPorId(Long id) {
         return entityManager.find(Livro.class, id);
     }
-    
-     /**
+
+    /**
      * Consulta a livro por Titulo.
-     * 
-     * @param name
+     *
+     * @param titulo
      * @return
      */
-    @SuppressWarnings("unchecked")
     public List<Livro> consultarPorTitulo(String titulo) {
-        return (List<Livro>) entityManager.createQuery(
-        "SELECT l FROM Livro l WHERE l.titulo LIKE :custTitulo")
-        .setParameter("custTitulo", "%"+titulo+"%")
-        .getResultList();
+        TypedQuery<Livro> query
+                = entityManager.createNamedQuery("Livro.findByTitulo", Livro.class);
+        return query.setParameter("titulo", "%" + titulo + "%").getResultList();
     }
 }

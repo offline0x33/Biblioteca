@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -21,6 +23,11 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "livro")
+@NamedQueries({
+    @NamedQuery(name = "EmprestimoView.findAll", query = "SELECT l FROM Livro l"),
+    @NamedQuery(name = "EmprestimoView.findById", query = "SELECT l FROM Livro l WHERE e.id = :id"),
+    @NamedQuery(name = "EmprestimoView.findByTitulo", query = "SELECT l FROM Livro l WHERE l.titulo LIKE :titulo"),
+    @NamedQuery(name = "EmprestimoView.findByAutor", query = "SELECT l FROM Livro l WHERE e.autor = :autor")})
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 3L;

@@ -4,15 +4,16 @@
  */
 package com.bajo.biblioteca.dao;
 
+import com.bajo.biblioteca.model.Livro;
 import com.bajo.biblioteca.model.Pessoa;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
  *
  * @author bajinho
  */
-
 /**
  * Classe utilizada para realizar as operações com o bando de dados.
  */
@@ -91,15 +92,13 @@ public class PessoaDAO {
 
     /**
      * Consulta a pessoa por Nome.
-     * 
+     *
      * @param name
      * @return
      */
-    @SuppressWarnings("unchecked")
     public List<Pessoa> consultarPorNome(String name) {
-        return (List<Pessoa>) entityManager.createQuery(
-        "SELECT p FROM Pessoa p WHERE p.nome LIKE :custName")
-        .setParameter("custName", "%"+name+"%")
-        .getResultList();
+        TypedQuery<Pessoa> query
+                = entityManager.createNamedQuery("Livro.findByNome", Pessoa.class);
+        return query.setParameter("nome", "%" + name + "%").getResultList();
     }
 }

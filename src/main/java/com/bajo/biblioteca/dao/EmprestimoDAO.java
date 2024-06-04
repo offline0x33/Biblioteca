@@ -101,7 +101,6 @@ public class EmprestimoDAO {
      * @param nome
      * @return
      */
-    @SuppressWarnings("unchecked")
     public List<EmprestimoView> consultarPorNome(String nome) {
         TypedQuery<EmprestimoView> query
                 = entityManager.createNamedQuery("EmprestimoView.findByNome", EmprestimoView.class);
@@ -114,14 +113,9 @@ public class EmprestimoDAO {
      * @param titulo
      * @return
      */
-    @SuppressWarnings("unchecked")
     public List<EmprestimoView> consultarPorTitulo(String titulo) {
         TypedQuery<EmprestimoView> query
                 = entityManager.createNamedQuery("EmprestimoView.findByTitulo", EmprestimoView.class);
         return query.setParameter("nome", "%" + titulo + "%").getResultList();
-//        return (List<EmprestimoView>) entityManager.createQuery(
-//        "SELECT e FROM EmprestimoView e WHERE e.nome LIKE :custName")
-//        .setParameter("custTitulo", "%"+titulo+"%")
-//        .getResultList();
     }
 }
