@@ -5,6 +5,7 @@
 package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.PessoaDAO;
+import jakarta.json.JsonObject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
@@ -23,9 +24,9 @@ public class PessoasResource {
     private EntityManager em;
 
     @GET
-    @Produces("text/xml")
-    public String getUser(@PathParam("username") String userName) {
+    @Produces("application/json; qs=0.75")
+    public JsonObject getUser(@PathParam("username") String userName) {
         PessoaDAO dao = new PessoaDAO(em);
-        return dao.consultarPorNome(userName).toString();
+        return (JsonObject) dao.consultarPorNome(userName);
     }
 }
