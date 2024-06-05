@@ -5,7 +5,9 @@
 package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.PessoaDAO;
-import jakarta.json.JsonObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+//import jakarta.json.JsonObject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
@@ -25,8 +27,10 @@ public class PessoasResource {
 
     @GET
     @Produces("application/json; qs=0.75")
-    public JsonObject getUser(@PathParam("username") String userName) {
+    public String getUser(@PathParam("username") String userName) throws JsonProcessingException {
         PessoaDAO dao = new PessoaDAO(em);
-        return (JsonObject) dao.consultarPorNome(userName);
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.writeValueAsString(dao.consultarPorNome(userName));
     }
 }
