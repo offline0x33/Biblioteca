@@ -98,7 +98,7 @@ public class PessoaDAO {
      */
     public List<Pessoa> consultarPorNome(String name) {
         TypedQuery<Pessoa> query
-                = entityManager.createNamedQuery("Livro.findByNome", Pessoa.class);
+                = entityManager.createNamedQuery("Pessoa.findByNome", Pessoa.class);
         return query.setParameter("nome", "%" + name + "%").getResultList();
     }
 }
