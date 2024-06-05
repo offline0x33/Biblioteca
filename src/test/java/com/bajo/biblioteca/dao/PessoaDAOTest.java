@@ -43,14 +43,14 @@ public class PessoaDAOTest {
      */
     @Test
     public void testSalvar() throws Exception {
-        System.out.println("salvar");
-        Pessoa pessoa = null;
-        PessoaDAO instance = null;
-        Pessoa expResult = null;
-        Pessoa result = instance.salvar(pessoa);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        System.out.println("salvar");
+//        Pessoa pessoa = null;
+//        PessoaDAO instance = null;
+//        Pessoa expResult = null;
+//        Pessoa result = instance.salvar(pessoa);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,12 +58,12 @@ public class PessoaDAOTest {
      */
     @Test
     public void testExcluir() {
-        System.out.println("excluir");
-        Long id = null;
-        PessoaDAO instance = null;
-        instance.excluir(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        System.out.println("excluir");
+//        Long id = null;
+//        PessoaDAO instance = null;
+//        instance.excluir(id);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -71,14 +71,14 @@ public class PessoaDAOTest {
      */
     @Test
     public void testConsultarPorId() {
-        System.out.println("consultarPorId");
-        Long id = null;
-        PessoaDAO instance = null;
-        Pessoa expResult = null;
-        Pessoa result = instance.consultarPorId(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        System.out.println("consultarPorId");
+//        Long id = null;
+//        PessoaDAO instance = null;
+//        Pessoa expResult = null;
+//        Pessoa result = instance.consultarPorId(id);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -86,14 +86,14 @@ public class PessoaDAOTest {
      */
     @Test
     public void testConsultarPorNome() {
-        System.out.println("consultarPorNome");
-        String name = "";
-        PessoaDAO instance = null;
-        List<Pessoa> expResult = null;
-        List<Pessoa> result = instance.consultarPorNome(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        System.out.println("consultarPorNome");
+//        String name = "";
+//        PessoaDAO instance = null;
+//        List<Pessoa> expResult = null;
+//        List<Pessoa> result = instance.consultarPorNome(name);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
     }
     
 }

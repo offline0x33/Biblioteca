@@ -23,7 +23,7 @@ RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#70365 --silent
 RUN /opt/jboss/wildfly/bin/add-user.sh -a -u ejbuser -p 5b3786b9989c762bb194680e06b6b9cc
 
 # Set the WILDFLY_VERSION env variable
-ENV WILDFLY_VERSION 29.0.0.Final
+ENV WILDFLY_VERSION 32.0.0.Final
 ENV WILDFLY_SHA1 10da807fdc6e0b343562da54460f6fded8eefac5
 ENV JBOSS_HOME /opt/jboss/wildfly
 
