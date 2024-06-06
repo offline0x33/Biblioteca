@@ -56,4 +56,11 @@ public class PessoaBean implements PessoaRemote {
         logger.log(Level.INFO, "Consultar pessoa por nome: ", dao.consultarPorNome(name));
         return dao.consultarPorNome(name);
     }
+
+    @Override
+    public List<Pessoa> getAll() {
+        PessoaDAO dao = new PessoaDAO(em);
+        logger.log(Level.INFO, "Retorna todas pessoa cadastrada: ", dao.getAll());
+        return dao.getAll();
+    }
 }

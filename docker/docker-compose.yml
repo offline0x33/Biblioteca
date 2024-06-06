@@ -2,6 +2,7 @@ services:
   app:
     container_name: "app"
     image: "jboss/wildfly-admin:latest"
+    mem_limit: 2g
     environment:
       - WILDFLY_USER=admin
       - WILDFLY_PASS=Admin#70365
@@ -11,40 +12,34 @@ services:
       - DB_URI=db:3306
     depends_on:
       - db
-      - db_seeder
     ports:
       - "8080:8080" # application
       - "9990:9990" # admin console
       
   db:
     container_name: "db"
-    image: "mysql:latest"
-    #restart: always
+    image: "mysql:8.1.0"
+    mem_limit: 1g
+    cap_add:
+      - SYS_NICE
+    restart: always
     environment:
       - MYSQL_DATABASE=biblioteca
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=supersecret
-#    command: 
-#      - --initialize-insecure
-    command: --pid-file /var/lib/mysql/mysqld.pid
+      - HOST_CACHE_SIZE=0
     volumes:
-      - ./workdir/mysql/init/:/docker-entrypoint-initdb.d/ # init database
-      - ./workdir/mysql/data/:/var/lib/mysql/ # data storage
-      - ./workdir/wildfly:/wildfly/ # wildfly
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/mysql/data/:/var/lib/mysql/ # data storage
+      - ./db/wildfly:/wildfly/ # wildfly
     ports:
       - "3306:3306"
-
-  db_seeder:
-    image: "mysql:latest"
-    volumes:
-      - ./biblioteca.sql:/biblioteca.sql
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD= "true"
-    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root -psupersecret --host=db --port=3306 biblioteca < /biblioteca.sql && exit"] 
-    depends_on:
-      - db
       
+volumes:
+  db:
+    driver: local
+    
 networks:
   default:
     driver: bridge

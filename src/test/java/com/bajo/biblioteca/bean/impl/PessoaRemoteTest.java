@@ -112,6 +112,11 @@ public class PessoaRemoteTest {
         public List<Pessoa> consultarPorNome(String nome) {
             return null;
         }
+
+        @Override
+        public List<Pessoa> getAll() {
+           return null;
+        }
     }
     
 }

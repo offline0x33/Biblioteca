@@ -6,29 +6,48 @@ package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.PessoaDAO;
 import com.bajo.biblioteca.model.Pessoa;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import java.util.List;
+import jakarta.ws.rs.core.Response;
 
 /**
  *
  * @author bajinho
  */
-@Path("/users/{username}")
+@RequestScoped
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/users")
 public class PessoasResource {
 
     @PersistenceContext
     private EntityManager em;
+    
+    @GET
+    public Response getAll() {
+        PessoaDAO dao = new PessoaDAO(em);
+        return Response.ok(dao.getAll()).build();
+    }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Pessoa> getUser(@PathParam("username") String userName) {
+    @Path("{username}")
+    public Response getUser(@PathParam("username") String userName) {
         PessoaDAO dao = new PessoaDAO(em);
-        return dao.consultarPorNome(userName);
+        return Response.ok(dao.consultarPorNome(userName)).build();
+    }
+
+    @POST
+    public Response create(Pessoa pessoa) throws Exception {
+        PessoaDAO dao = new PessoaDAO(em);
+        dao.salvar(pessoa);
+        return Response.ok().build();
     }
 }

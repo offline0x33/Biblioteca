@@ -4,8 +4,8 @@
  */
 package com.bajo.biblioteca.dao;
 
-import com.bajo.biblioteca.model.Livro;
 import com.bajo.biblioteca.model.Pessoa;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Classe utilizada para realizar as operações com o bando de dados.
  */
+@ApplicationScoped
 public class PessoaDAO {
 
     private final EntityManager entityManager;
@@ -100,5 +101,16 @@ public class PessoaDAO {
         TypedQuery<Pessoa> query
                 = entityManager.createNamedQuery("Pessoa.findByNome", Pessoa.class);
         return query.setParameter("nome", "%" + name + "%").getResultList();
+    }
+
+    /**
+     * Consulta toda pessoa cadastrada.
+     *
+     * @return
+     */
+    public List<Pessoa> getAll() {
+        TypedQuery<Pessoa> query
+                = entityManager.createNamedQuery("Pessoa.findAll", Pessoa.class);
+        return query.getResultList();
     }
 }
