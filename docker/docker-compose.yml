@@ -3,6 +3,8 @@ services:
     container_name: "app"
     image: "jboss/wildfly-admin:latest"
     mem_limit: 2g
+    mem_reservation: 128M
+    cpus: 0.5
     environment:
       - WILDFLY_USER=admin
       - WILDFLY_PASS=Admin#70365
@@ -10,6 +12,8 @@ services:
       - DB_USER=mysql
       - DB_PASS=mysql
       - DB_URI=db:3306
+    volumes:
+      - ./db/wildfly:/wildfly/ # wildfly
     depends_on:
       - db
     ports:
@@ -20,6 +24,8 @@ services:
     container_name: "db"
     image: "mysql:8.1.0"
     mem_limit: 1g
+    mem_reservation: 128M
+    cpus: 0.5
     cap_add:
       - SYS_NICE
     restart: always
@@ -32,14 +38,16 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./db/mysql/data/:/var/lib/mysql/ # data storage
-      - ./db/wildfly:/wildfly/ # wildfly
     ports:
       - "3306:3306"
       
-volumes:
+volumes:  
   db:
     driver: local
-    
+    driver_opts:
+      type: disk
+      size: 1GB
+  
 networks:
   default:
     driver: bridge

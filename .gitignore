@@ -23,7 +23,7 @@
 hs_err_pid*
 replay_pid*
 !/docker/mysql-connector-java-8.1.0.jar
-/db/
+/docker/db/*
 /biblioteca-ear/nb-configuration.xml
 /classes/nb-configuration.xml
 /nb-configuration.xml
