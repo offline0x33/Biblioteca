@@ -4,7 +4,7 @@
  */
 package com.bajo.biblioteca.dao;
 
-import com.bajo.biblioteca.model.Pessoa;
+import com.bajo.biblioteca.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Classe utilizada para realizar as operações com o bando de dados.
  */
-public class PessoaDAO {
+public class UserDAO {
 
     private final EntityManager entityManager;
 
@@ -25,44 +25,44 @@ public class PessoaDAO {
      *
      * @param entityManager
      */
-    public PessoaDAO(EntityManager entityManager) {
+    public UserDAO(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     /**
      * Método para salvar ou atualizar a pessoa.
      *
-     * @param pessoa
+     * @param user
      * @return
      * @throws java.lang.Exception
      */
-    public Pessoa salvar(Pessoa pessoa) throws Exception {
-        System.out.println("Salvando o pessoa: "
-                + pessoa.getNome());
+    public User salvar(User user) throws Exception {
+        System.out.println("Salvando o usuário: "
+                + user.getUsername());
 
         /* Verifica se a pessoa ainda não está salva no 
       banco de dados. */
-        if (pessoa.getId() == null) {
+        if (user.getId() == null) {
             /* Salva a pessoa no banco de dados. */
-            this.entityManager.persist(pessoa);
+            this.entityManager.persist(user);
         } else {
             /* Verifica se a pessoa não está no estado managed. */
-            if (!this.entityManager.contains(pessoa)) {
+            if (!this.entityManager.contains(user)) {
                 /* Se a pessoa não está no estado managed verifica 
           se ele existe na base. */
-                if (entityManager.find(Pessoa.class, pessoa.getId())
+                if (entityManager.find(User.class, user.getId())
                         == null) {
-                    throw new Exception("Pessoa não existe!");
+                    throw new Exception("Usuário não existe!");
                 }
             }
             /* Faz uma atualização da pessoa que estava gravado na 
         base de dados. */
-            return entityManager.merge(pessoa);
+            return entityManager.merge(user);
         }
 
         /* Retorna a pessoa que foi salva, este retorno ocorre para
       podermos ter o id que foi salvo. */
-        return pessoa;
+        return user;
     }
 
     /**
@@ -72,11 +72,11 @@ public class PessoaDAO {
      */
     public void excluir(Long id) {
         /* Consulta a pessoa na base de dados através de seu ID. */
-        Pessoa pessoa = entityManager.find(Pessoa.class, id);
-        System.out.println("Excluindo a pessoa: " + pessoa.getNome());
+        User user = entityManager.find(User.class, id);
+        System.out.println("Excluindo a pessoa: " + user.getUsername());
 
         /* Remove a pessoa da base de dados. */
-        entityManager.remove(pessoa);
+        entityManager.remove(user);
     }
 
     /**
@@ -85,8 +85,8 @@ public class PessoaDAO {
      * @param id
      * @return
      */
-    public Pessoa consultarPorId(Long id) {
-        return entityManager.find(Pessoa.class, id);
+    public User consultarPorId(Long id) {
+        return entityManager.find(User.class, id);
     }
 
     /**
@@ -95,10 +95,22 @@ public class PessoaDAO {
      * @param name
      * @return
      */
-    public List<Pessoa> consultarPorNome(String name) {
-        TypedQuery<Pessoa> query
-                = entityManager.createNamedQuery("Pessoa.findByNome", Pessoa.class);
-        return query.setParameter("nome", "%" + name + "%").getResultList();
+    public List<User> consultarPorNome(String name) {
+        TypedQuery<User> query
+                = entityManager.createNamedQuery("User.findByUserName", User.class);
+        return query.setParameter("username", "%" + name + "%").getResultList();
+    }
+
+    /**
+     * Consulta a pessoa por Email.
+     *
+     * @param email
+     * @return
+     */
+    public User consultarPorEmail(String email) {
+        TypedQuery<User> query
+                = entityManager.createNamedQuery("User.findByEmail", User.class);
+        return query.setParameter("email", "%" + email + "%").getSingleResult();
     }
 
     /**
@@ -106,9 +118,9 @@ public class PessoaDAO {
      *
      * @return
      */
-    public List<Pessoa> getAll() {
-        TypedQuery<Pessoa> query
-                = entityManager.createNamedQuery("Pessoa.findAll", Pessoa.class);
+    public List<User> getAll() {
+        TypedQuery<User> query
+                = entityManager.createNamedQuery("User.findAll", User.class);
         return query.getResultList();
     }
 }

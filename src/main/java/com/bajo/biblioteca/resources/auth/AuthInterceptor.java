@@ -16,22 +16,22 @@ import java.util.logging.Logger;
 /**
  *
  * @author bajinho
- * 
+ *
  * Simplificando, os filtros permitem modificar as propriedades das solicitações
- * e respostas – por exemplo, cabeçalhos HTTP. Os filtros podem ser aplicados 
- * tanto no lado do servidor quanto no lado do cliente.
- * Tenha em mente que os filtros são sempre executados, independentemente de o 
- * recurso ter sido encontrado ou não.
- * 
+ * e respostas – por exemplo, cabeçalhos HTTP. Os filtros podem ser aplicados
+ * tanto no lado do servidor quanto no lado do cliente. Tenha em mente que os
+ * filtros são sempre executados, independentemente de o recurso ter sido
+ * encontrado ou não.
+ *
  */
-
 /**
- * Implementando o ContainerRequestFilter interface e registrá-lo como um 
- * Provedor em nossa api Rest.
- * Caso queiramos executar um filtro antes da correspondência de recursos, 
- * podemos usar um filtro de pré-correspondência anotando nosso filtro com o 
+ * Implementando o ContainerRequestFilter interface e registrá-lo como um
+ * Provedor em nossa api Rest. Caso queiramos executar um filtro antes da
+ * correspondência de recursos, podemos usar um filtro de pré-correspondência
+ * anotando nosso filtro com o
+ *
  * @PreMatching como anotação:
-*/
+ */
 @Provider
 @PreMatching
 public class AuthInterceptor implements ContainerRequestFilter {
@@ -54,23 +54,23 @@ public class AuthInterceptor implements ContainerRequestFilter {
         }
 
         // Validate the Authorization header
-        if (!isTokenBasedAuthentication(authorizationHeader)) {
-            abortWithUnauthorized(requestContext);
-            return;
-        }
+//        if (!isTokenBasedAuthentication(authorizationHeader)) {
+//            abortWithUnauthorized(requestContext);
+//            return;
+//        }
 
         // Extract the token from the Authorization header
-        String token = authorizationHeader
-                .substring(AUTHENTICATION_SCHEME.length()).trim();
-
-        try {
-
-            // Validate the token
-            validateToken(token);
-
-        } catch (Exception e) {
-            abortWithUnauthorized(requestContext);
-        }
+//        String token = authorizationHeader
+//                .substring(AUTHENTICATION_SCHEME.length()).trim();
+//
+//        try {
+//
+//            // Validate the token
+//            validateToken(token);
+//
+//        } catch (Exception e) {
+//            abortWithUnauthorized(requestContext);
+//        }
     }
 
     private boolean isTokenBasedAuthentication(String authorizationHeader) {

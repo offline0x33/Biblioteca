@@ -5,7 +5,6 @@
 package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Livro;
-import com.bajo.biblioteca.model.view.EmprestimoView;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;

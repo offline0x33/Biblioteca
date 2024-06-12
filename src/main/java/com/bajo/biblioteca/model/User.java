@@ -22,15 +22,16 @@ import java.io.Serializable;
  * @author bajinho
  */
 @Entity
-@Table(name = "livro")
+@Table(name = "user", catalog = "biblioteca", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"),
-    @NamedQuery(name = "Livro.findById", query = "SELECT l FROM Livro l WHERE l.id = :id"),
-    @NamedQuery(name = "Livro.findByTitulo", query = "SELECT l FROM Livro l WHERE l.titulo LIKE :titulo"),
-    @NamedQuery(name = "Livro.findByAutor", query = "SELECT l FROM Livro l WHERE l.autor = :autor")})
-public class Livro implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),    
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email LIKE :email"),
+    @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.username LIKE :username")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -38,31 +39,37 @@ public class Livro implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "titulo", nullable = false, length = 100)
-    private String titulo;
+    @Size(min = 1, max = 1024)
+    @Column(name = "password")
+    private String password;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "autor", nullable = false, length = 100)
-    private String autor;
+    @Size(min = 1, max = 256)
+    @Column(name = "username", unique = true)
+    private String username;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "emprestado", nullable = false)
-    private int emprestado;
+    @Column(name = "authorities")
+    private String authorities;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "email")
+    private String email;
 
-    public Livro() {
+    public String getAuthorities() {
+        return authorities;
     }
 
-    public Livro(Long id) {
-        this.id = id;
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
     }
 
-    public Livro(Long id, String titulo, String autor, int emprestado) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.emprestado = emprestado;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {
@@ -73,28 +80,20 @@ public class Livro implements Serializable {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public int getEmprestado() {
-        return emprestado;
-    }
-
-    public void setEmprestado(int emprestado) {
-        this.emprestado = emprestado;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -107,10 +106,10 @@ public class Livro implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Livro)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Livro other = (Livro) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -119,7 +118,6 @@ public class Livro implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bajo.biblioteca.model.Livro[ id=" + id + " ]";
+        return "com.bajo.biblioteca.model.User[ id=" + id + " ]";
     }
-
 }

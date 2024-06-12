@@ -17,7 +17,37 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `biblioteca` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `biblioteca` ;
 
+-- -----------------------------------------------------
+-- Table `biblioteca`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `biblioteca`.`user` ;
 
+CREATE TABLE IF NOT EXISTS `biblioteca`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(256) NOT NULL,
+  `password` VARCHAR(1024) NOT NULL,
+  `email` VARCHAR(512) NOT NULL,
+  `authorities` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
+-- Table `biblioteca`.`group`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `biblioteca`.`group` ;
+
+CREATE TABLE IF NOT EXISTS `biblioteca`.`group` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(256) NOT NULL,
+  `username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 -- Table `biblioteca`.`emprestimo`
@@ -87,6 +117,21 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Insert in Tables`
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- User
+-- -----------------------------------------------------
+INSERT INTO `biblioteca`.`user` (`username`, `password`, `email`, `authorities`)
+VALUES 
+    ("jhon", "$2a$12$xgG4AjFe4WNDbotwOs1w3e.1e3/iZOdyEdui2fQ01J0Vk5wRsyQf6", "jhon@biblioteca.com", "user");
+
+-- -----------------------------------------------------
+-- Group
+-- -----------------------------------------------------
+INSERT INTO `biblioteca`.`group` (`name`, `username`)
+VALUES 
+    ("user", "jhon");
+
 -- -----------------------------------------------------
 -- Pessoa
 -- -----------------------------------------------------

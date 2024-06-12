@@ -8,6 +8,8 @@
     <class>com.bajo.biblioteca.model.Livro</class>
     <class>com.bajo.biblioteca.model.Emprestimo</class>
     <class>com.bajo.biblioteca.model.Pessoa</class>
+    <class>com.bajo.biblioteca.model.User</class>
+    <class>com.bajo.biblioteca.model.Group</class>
     <class>com.bajo.biblioteca.model.view.EmprestimoView</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>

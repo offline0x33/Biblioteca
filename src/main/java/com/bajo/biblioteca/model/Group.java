@@ -10,45 +10,42 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
  * @author bajinho
  */
 @Entity
-@Table(name = "emprestimo")
-public class Emprestimo implements Serializable {
+@Table(name = "group", catalog = "biblioteca", schema = "")
+@NamedQueries({
+    @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g"),
+    @NamedQuery(name = "Group.findById", query = "SELECT g FROM Group g WHERE g.id = :id"),    
+    @NamedQuery(name = "Group.findByName", query = "SELECT g FROM Group g WHERE g.name LIKE :name")})
+public class Group implements Serializable {
 
     private static final long serialVersionUID = 1L;
+        
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "dataemprestimo")
-    @Temporal(TemporalType.DATE)
-    private Date dataemprestimo;
-    @Column(name = "datadevolucao")
-    @Temporal(TemporalType.DATE)
-    private Date datadevolucao;
-
-    @Column(name = "livro_id")
-    private Long livro_id;
-
-    @Column(name = "pessoa_id")
-    private Long pessoa_id;
-
-    public Emprestimo() {
-    }
-
-    public Emprestimo(Long id) {
-        this.id = id;
-    }
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "name")
+    private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "username", unique = true)
+    private String username;
 
     public Long getId() {
         return id;
@@ -58,36 +55,20 @@ public class Emprestimo implements Serializable {
         this.id = id;
     }
 
-    public Date getDataemprestimo() {
-        return dataemprestimo;
+    public String getName() {
+        return name;
     }
 
-    public void setDataemprestimo(Date dataemprestimo) {
-        this.dataemprestimo = dataemprestimo;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getDatadevolucao() {
-        return datadevolucao;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDatadevolucao(Date datadevolucao) {
-        this.datadevolucao = datadevolucao;
-    }
-
-    public Long getLivro_id() {
-        return livro_id;
-    }
-
-    public void setLivro_id(Long livro_id) {
-        this.livro_id = livro_id;
-    }
-
-    public Long getPessoa_id() {
-        return pessoa_id;
-    }
-
-    public void setPessoa_id(Long pessoa_id) {
-        this.pessoa_id = pessoa_id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -100,10 +81,10 @@ public class Emprestimo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Emprestimo)) {
+        if (!(object instanceof Pessoa)) {
             return false;
         }
-        Emprestimo other = (Emprestimo) object;
+        Group other = (Group) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -112,7 +93,6 @@ public class Emprestimo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bajo.biblioteca.model.Emprestimo[ id=" + id + " ]";
+        return "com.bajo.biblioteca.model.Group[ id=" + id + " ]";
     }
-
 }

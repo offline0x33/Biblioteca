@@ -4,8 +4,8 @@
  */
 package com.bajo.biblioteca.resources;
 
-import com.bajo.biblioteca.dao.PessoaDAO;
-import com.bajo.biblioteca.model.Pessoa;
+import com.bajo.biblioteca.dao.UserDAO;
+import com.bajo.biblioteca.model.User;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
@@ -27,29 +27,36 @@ import jakarta.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @DeclareRoles("user")
-@Path("/pessoa")
-public class PessoasResource {
+@Path("/users")
+public class UsersResource {
 
     @PersistenceContext
     private EntityManager em;
     
     @GET
     public Response getAll() {
-        PessoaDAO dao = new PessoaDAO(em);
+        UserDAO dao = new UserDAO(em);
         return Response.ok(dao.getAll()).build();
     }
 
     @GET
-    @Path("{name}")
-    public Response getUser(@PathParam("name") String name) {
-        PessoaDAO dao = new PessoaDAO(em);
-        return Response.ok(dao.consultarPorNome(name)).build();
+    @Path("{username}")
+    public Response getUser(@PathParam("username") String userName) {
+        UserDAO dao = new UserDAO(em);
+        return Response.ok(dao.consultarPorNome(userName)).build();
+    }
+    
+    @GET
+    @Path("/email/{email}")
+    public Response getUserByEmail(@PathParam("email") String email) {
+        UserDAO dao = new UserDAO(em);
+        return Response.ok(dao.consultarPorEmail(email)).build();
     }
 
     @POST
-    public Response create(Pessoa pessoa) throws Exception {
-        PessoaDAO dao = new PessoaDAO(em);
-        dao.salvar(pessoa);
+    public Response create(User user) throws Exception {
+        UserDAO dao = new UserDAO(em);
+        dao.salvar(user);
         return Response.ok().build();
     }
 }
