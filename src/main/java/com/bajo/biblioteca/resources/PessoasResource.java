@@ -10,8 +10,10 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -48,6 +50,21 @@ public class PessoasResource {
 
     @POST
     public Response create(Pessoa pessoa) throws Exception {
+        PessoaDAO dao = new PessoaDAO(em);
+        dao.salvar(pessoa);
+        return Response.ok().build();
+    }
+    
+    @DELETE
+    @Path("{id}")
+    public Response excluir(@PathParam("name") Long id) throws Exception {
+        PessoaDAO dao = new PessoaDAO(em);
+        dao.excluir(id);
+        return Response.ok().build();
+    }
+    
+    @PUT
+    public Response editar(Pessoa pessoa) throws Exception {
         PessoaDAO dao = new PessoaDAO(em);
         dao.salvar(pessoa);
         return Response.ok().build();
