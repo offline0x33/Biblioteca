@@ -15,6 +15,7 @@ import io.jsonwebtoken.security.InvalidKeyException;
 import io.jsonwebtoken.security.KeyAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.Password;
+//import jakarta.annotation.security.DeclareRoles;
 //import io.jsonwebtoken.security.Keys;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
@@ -32,7 +33,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 //@ApplicationScoped
-//@DeclareRoles({"ViewBalance", "Debtor", "Creditor", "Debtor2", "BigSpender"})
+//@DeclareRoles({"Users, ViewBalance", "Debtor", "Creditor", "Debtor2", "BigSpender"})
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -67,7 +68,7 @@ public class JwtUtil {
     }
 
     @POST
-    @Path("/login")
+    @Path("/login")   
     public Response generateToken(Login usuario) {
         try {
             UserDAO dao = new UserDAO(em);
@@ -80,15 +81,18 @@ public class JwtUtil {
                 Date now = new Date();
                 Date expiration = Date
                         .from(LocalDateTime.now()
-                                .plusMinutes(60L)
+                                .plusMinutes(60000L)
                                 .atZone(ZoneId.systemDefault())
                                 .toInstant());
+                
+                String[] groups = {users.getAuthorities()};
 
                 jwtToken = Jwts.builder()
                         .subject(subject)
                         .issuer("localhost:8080")
                         .issuedAt(now)
                         .expiration(expiration)
+                        .claim("groups", groups)
                         .encryptWith(password, alg, enc)
                         //                        .signWith(getSignInKey())
                         .compact();
@@ -130,27 +134,31 @@ public class JwtUtil {
     }
 
     /**
-     * 
-     * 
-     * Se não verificar o tamanho do token ele retorna Excption com dados abaixo:
-     * The 'A256CBC-HS512' algorithm requires authentication tags with a length 
-     * of 256 bits (32 bytes).  The provided key has a length of 264 bits 
+     *
+     *
+     * Se não verificar o tamanho do token ele retorna Excption com dados
+     * abaixo: The 'A256CBC-HS512' algorithm requires authentication tags with a
+     * length of 256 bits (32 bytes). The provided key has a length of 264 bits
      * (33 bytes).
-     * 
+     *
      * @param token
      * @param login
-     * @return 
+     * @return
      */
     @POST
     @Path("/validate/{token}")
     public Response validate(@PathParam("token") String token, Login login) {
-        if (token.length() == 32) {
-            final String user = extractUser(token);
-            if (user.equals(login.getEmail()) && !isTokenExpired(token)) {
-                return Response.ok("valido").build();
-            }
+//        if (token.length() == 32) {
+        final String user = extractUser(token);
+        if (user.equals(login.getEmail()) && !isTokenExpired(token)) {
+            return Response.ok("valido").build();
         }
+//        }
         return Response.ok("invalido").build();
+    }
+
+    public boolean verify(String token) {
+        return !isTokenExpired(token);
     }
 
     public boolean validateToken(String token, Login login) {

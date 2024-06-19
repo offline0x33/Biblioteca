@@ -6,7 +6,6 @@ package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.PessoaDAO;
 import com.bajo.biblioteca.model.Pessoa;
-import jakarta.annotation.security.DeclareRoles;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -23,16 +22,17 @@ import jakarta.ws.rs.core.Response;
  *
  * @author bajinho
  */
+//@Stateless
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@DeclareRoles("user")
+//@DeclareRoles("user")
 @Path("/pessoa")
 public class PessoasResource {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @GET
     public Response getAll() {
         PessoaDAO dao = new PessoaDAO(em);

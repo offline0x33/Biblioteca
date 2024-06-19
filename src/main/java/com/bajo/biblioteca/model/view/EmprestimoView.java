@@ -37,35 +37,43 @@ import java.util.Date;
 public class EmprestimoView implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Basic(optional = false)
     @NotNull
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "livro_id", nullable = false)
     private int livroId;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "pessoa_id", nullable = false)
     private int pessoaId;
+
     @Column(name = "dataemprestimo")
     @Temporal(TemporalType.DATE)
     private Date dataemprestimo;
+
     @Column(name = "datadevolucao")
     @Temporal(TemporalType.DATE)
     private Date datadevolucao;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -138,5 +146,5 @@ public class EmprestimoView implements Serializable {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    
+
 }

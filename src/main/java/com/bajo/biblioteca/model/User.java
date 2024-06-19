@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Table(name = "user", catalog = "biblioteca", schema = "")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),    
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email LIKE :email"),
     @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.username LIKE :username")})
 public class User implements Serializable {
@@ -37,20 +37,24 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1024)
     @Column(name = "password")
     private String password;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "username", unique = true)
     private String username;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "authorities")
     private String authorities;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "email")

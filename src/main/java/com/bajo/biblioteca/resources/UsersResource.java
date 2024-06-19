@@ -6,7 +6,6 @@ package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.UserDAO;
 import com.bajo.biblioteca.model.User;
-import jakarta.annotation.security.DeclareRoles;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -26,7 +25,6 @@ import jakarta.ws.rs.core.Response;
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@DeclareRoles("user")
 @Path("/users")
 public class UsersResource {
 

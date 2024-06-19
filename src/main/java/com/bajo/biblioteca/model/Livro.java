@@ -31,21 +31,25 @@ import java.io.Serializable;
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "autor", nullable = false, length = 100)
     private String autor;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "emprestado", nullable = false)

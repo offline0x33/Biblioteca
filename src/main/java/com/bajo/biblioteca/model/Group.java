@@ -25,22 +25,24 @@ import java.io.Serializable;
 @Table(name = "group", catalog = "biblioteca", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g"),
-    @NamedQuery(name = "Group.findById", query = "SELECT g FROM Group g WHERE g.id = :id"),    
+    @NamedQuery(name = "Group.findById", query = "SELECT g FROM Group g WHERE g.id = :id"),
     @NamedQuery(name = "Group.findByName", query = "SELECT g FROM Group g WHERE g.name LIKE :name")})
 public class Group implements Serializable {
 
     private static final long serialVersionUID = 1L;
-        
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "name")
     private String name;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)

@@ -4,12 +4,18 @@
  */
 package com.bajo.biblioteca.resources.auth;
 
+import com.bajo.biblioteca.resources.auth.util.JwtUtil;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.ws.rs.NotAuthorizedException;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.container.ContainerResponseContext;
+import jakarta.ws.rs.container.ContainerResponseFilter;
 import jakarta.ws.rs.container.PreMatching;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,52 +40,57 @@ import java.util.logging.Logger;
  */
 @Provider
 @PreMatching
-public class AuthInterceptor implements ContainerRequestFilter {
+@RequestScoped
+public class AuthInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
+
+    private JwtUtil jwtUtil;
 
     private static final Logger logger
             = Logger.getLogger("com.bajo.biblioteca.resources.auth.AuthInterceptor");
 
-    private static final String REALM = "example";
+    private static final String REALM = "localhost";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
 
-    @Override
-    public void filter(ContainerRequestContext requestContext) {
-        // JWT authentication logic
-        // Get the Authorization header from the request
-        String authorizationHeader
-                = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-
-        if (requestContext.getMethod().equals("GET")) {
-            logger.log(Level.INFO, "Get request: ", requestContext.getMethod());
-        }
-
-        // Validate the Authorization header
-//        if (!isTokenBasedAuthentication(authorizationHeader)) {
-//            abortWithUnauthorized(requestContext);
-//            return;
-//        }
-
-        // Extract the token from the Authorization header
-//        String token = authorizationHeader
-//                .substring(AUTHENTICATION_SCHEME.length()).trim();
-//
-//        try {
-//
-//            // Validate the token
-//            validateToken(token);
-//
-//        } catch (Exception e) {
-//            abortWithUnauthorized(requestContext);
-//        }
+    public AuthInterceptor() {
+        this.jwtUtil = new JwtUtil();
     }
 
-    private boolean isTokenBasedAuthentication(String authorizationHeader) {
+    /**
+     * Incoming (request) filter
+     *
+     * @param requestContext
+     */
+    @Override
+    public void filter(ContainerRequestContext requestContext) {
 
-        // Check if the Authorization header is valid
-        // It must not be null and must be prefixed with "Bearer" plus a whitespace
-        // The authentication scheme comparison must be case-insensitive
-        return authorizationHeader != null && authorizationHeader.toLowerCase()
-                .startsWith(AUTHENTICATION_SCHEME.toLowerCase() + " ");
+        if (requestContext.getMethod().equals("GET")) {
+            // JWT authentication logic
+            // Get the Authorization header from the request
+            String authHeader = requestContext.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+
+            if (authHeader != null) {
+                String token = authHeader
+                        .substring(AUTHENTICATION_SCHEME.length() + 1).trim();
+
+                try {
+
+                    // Validate the token
+                    jwtUtil.verify(token);
+
+                } catch (Exception e) {
+                    logger.log(Level.INFO, "Get request: " + e + "token: " + token, requestContext.getMethod());
+                    abortWithUnauthorized(requestContext);
+                }
+            } else {
+
+                throw new NotAuthorizedException("Bearer error=\"invalid_token\"");
+            }
+        }
+
+    }
+
+    private boolean isValid(String token) {
+        return token != null && !token.isBlank();
     }
 
     private void abortWithUnauthorized(ContainerRequestContext requestContext) {
@@ -94,15 +105,11 @@ public class AuthInterceptor implements ContainerRequestFilter {
                         .build());
     }
 
-    private void validateToken(String token) throws Exception {
-        // Check if the token was issued by the server and if it's not expired
-        // Throw an Exception if the token is invalid
-        String pattern = String.join(AUTHENTICATION_SCHEME.toLowerCase(), " ");
-        String tokenNumber = token.substring(pattern.length() - 1);
-
-//        if (!AuthSingleton.getInstance().getToken().getToken().equals(tokenNumber)) {
-//            throw new Exception("Tolkien não Autenticado");
-//        }
-        throw new Exception("Tolkien não Autenticado");
+    /**
+     * Outbound (response) filter
+     */
+    @Override
+    public void filter(ContainerRequestContext crc, ContainerResponseContext crc1) throws IOException {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

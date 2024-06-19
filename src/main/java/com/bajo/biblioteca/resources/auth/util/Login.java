@@ -56,6 +56,6 @@ public class Login implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bajo.biblioteca.resources.auth.util.User[ id=" + email + " ]";
+        return "com.bajo.biblioteca.resources.auth.util.Login[ id=" + email + " ]";
     }
 }

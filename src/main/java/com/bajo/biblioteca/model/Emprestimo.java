@@ -25,14 +25,17 @@ import java.util.Date;
 public class Emprestimo implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
+    
     @Column(name = "dataemprestimo")
     @Temporal(TemporalType.DATE)
     private Date dataemprestimo;
+    
     @Column(name = "datadevolucao")
     @Temporal(TemporalType.DATE)
     private Date datadevolucao;
