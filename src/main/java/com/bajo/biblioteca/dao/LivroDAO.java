@@ -102,4 +102,16 @@ public class LivroDAO {
                 = entityManager.createNamedQuery("Livro.findByTitulo", Livro.class);
         return query.setParameter("titulo", "%" + titulo + "%").getResultList();
     }
+    
+    
+    /**
+     * Consulta todos livros cadastrados.
+     *
+     * @return
+     */
+    public List<Livro> getAll() {
+        TypedQuery<Livro> query
+                = entityManager.createNamedQuery("Livro.findAll", Livro.class);
+        return query.getResultList();
+    }
 }

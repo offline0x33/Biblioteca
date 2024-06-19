@@ -4,8 +4,8 @@
  */
 package com.bajo.biblioteca.resources;
 
-import com.bajo.biblioteca.dao.PessoaDAO;
-import com.bajo.biblioteca.model.Pessoa;
+import com.bajo.biblioteca.dao.LivroDAO;
+import com.bajo.biblioteca.model.Livro;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -22,20 +22,18 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 /**
- *  05-06-2024
- *  PessoaController
+ *  19-06-2024
+ *  LivroController
  * 
- *  Endpoint: http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/pessoa
+ *  Endpoint: http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/livro
  *
  * @author bajinho
  */
-//@Stateless
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-//@DeclareRoles("user")
-@Path("/pessoa")
-public class PessoasResource {
+@Path("/livro")
+public class LivrosResource {
 
     @PersistenceContext
     private EntityManager em;
@@ -43,45 +41,45 @@ public class PessoasResource {
     /**
      * 19-06-2024
      *
-     * Retorna todas as pessoas registradas no banco de dados.
+     * Retorna todos os livros registradas no banco de dados.
      *
      * @return Reponse 200
      */
     @GET
     public Response getAll() {
-        PessoaDAO dao = new PessoaDAO(em);
+        LivroDAO dao = new LivroDAO(em);
         return Response.ok(dao.getAll()).build();
     }
 
     /**
      * 19-06-2024
      *
-     * Retorna o usuario passaro no parametro name.
-     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/pessoa/name
+     * Retorna o livro passado no parametro titulo.
+     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/livro/titulo
      *
-     * @param name
+     * @param titulo
      * @return Response 200 + Json.
      */
     @GET
-    @Path("{name}")
-    public Response getUser(@PathParam("name") String name) {
-        PessoaDAO dao = new PessoaDAO(em);
-        return Response.ok(dao.consultarPorNome(name)).build();
+    @Path("{titulo}")
+    public Response getLivro(@PathParam("titulo") String titulo) {
+        LivroDAO dao = new LivroDAO(em);
+        return Response.ok(dao.consultarPorTitulo(titulo)).build();
     }
 
     /**
      * 19-06-2024
      *
-     * Cria registro do tipo pessoa com os dados passado pelo corpo Json.
-     * 
-     * @param pessoa
+     * Cria registro do tipo livro com os dados passado pelo corpo Json.
+     *
+     * @param livro
      * @return Response 201 to created.
      * @throws Exception
      */
     @POST
-    public Response create(Pessoa pessoa) throws Exception {
-        PessoaDAO dao = new PessoaDAO(em);
-        dao.salvar(pessoa);
+    public Response create(Livro livro) throws Exception {
+        LivroDAO dao = new LivroDAO(em);
+        dao.salvar(livro);
         return Response
                 .ok()
                 .status(HttpServletResponse.SC_CREATED)
@@ -91,9 +89,9 @@ public class PessoasResource {
     /**
      * 19-06-2024
      *
-     * Exclui um registro do tipo pessoa com o id passado como parametro.
-     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/pessoa/id
-     * 
+     * Exclui um registro do tipo livro com o id passado como parametro.
+     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/livro/id
+     *
      * @param id
      * @return Response 201.
      * @throws Exception
@@ -101,23 +99,23 @@ public class PessoasResource {
     @DELETE
     @Path("{id}")
     public Response excluir(@PathParam("id") Long id) throws Exception {
-        PessoaDAO dao = new PessoaDAO(em);
+        LivroDAO dao = new LivroDAO(em);
         dao.excluir(id);
         return Response.ok().build();
     }
 
     /**
      *  19-06-2024
-     *  Modifica um registro do tipo pessoa com os dados passados pelo Json.
+     *  Modifica um registro do tipo livro com os dados passados pelo Json.
      * 
-     * @param pessoa
+     * @param livro
      * @return Response 200.
      * @throws Exception
      */
     @PUT
-    public Response editar(Pessoa pessoa) throws Exception {
-        PessoaDAO dao = new PessoaDAO(em);
-        dao.salvar(pessoa);
+    public Response editar(Livro livro) throws Exception {
+        LivroDAO dao = new LivroDAO(em);
+        dao.salvar(livro);
         return Response.ok().build();
     }
 }

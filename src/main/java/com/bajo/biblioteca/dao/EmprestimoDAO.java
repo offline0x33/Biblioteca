@@ -118,4 +118,15 @@ public class EmprestimoDAO {
                 = entityManager.createNamedQuery("EmprestimoView.findByTitulo", EmprestimoView.class);
         return query.setParameter("nome", "%" + titulo + "%").getResultList();
     }
+
+    /**
+     * Consulta todos Emprestimos cadastrados.
+     *
+     * @return
+     */
+    public List<EmprestimoView> getAll() {
+        TypedQuery<EmprestimoView> query
+                = entityManager.createNamedQuery("Emprestimo.findAll", EmprestimoView.class);
+        return query.getResultList();
+    }
 }
