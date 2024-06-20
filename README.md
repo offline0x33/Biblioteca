@@ -34,7 +34,7 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 - **Um simples inicio**
 
 Requisitos.
-![Docker](https://img.shields.io/librariesio/github/docker-library/docker)
+![Docker](https://img.shields.io/librariesio/github/docker-library/docker?logo=docker)
 ![Docker-compose](https://img.shields.io/librariesio/github/docker/compose)
 --maven
 --nesse projeto estou usando Netbeans, mas você pode usar o de sua preferencia
