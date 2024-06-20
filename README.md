@@ -34,7 +34,7 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 - **Um simples inicio**
 
 Requisitos.
-![Docker](https://img.shields.io/depfu/dependencies/github/docker%2Fcompose)
+![Docker](https://img.shields.io/depfu/dependencies/github/docker/compose)
 
 --docker e docker-composer
 --maven
