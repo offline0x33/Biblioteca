@@ -9,6 +9,9 @@
   </h1>
 </div>
 
+![GitHub](https://img.shields.io/github/license/bajinho/Biblioteca)
+![GitHub Release Date](https://img.shields.io/github/release-date/bajinho/Biblioteca)
+
 ## Introdução
 
 Biblioteca é um projeto de apredizagem da tecnlogia JakartaEE em sua versão 10.
