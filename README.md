@@ -2,9 +2,8 @@
   <h1 align="center">
     Projeto Biblioteca
     <br />
-    <br />
     <a href="https://jakarta.ee/release/10/">
-      <img src="https://jakarta.ee/images/jakarta/jakarta_ee_logo_schooner_color_horizontal_default.png" height="24px" alt="JakartaEE 10">
+      <img src="https://jakarta.ee/images/jakarta/jakarta_ee_logo_schooner_color_horizontal_default.png" height="32px" alt="JakartaEE 10">
     </a>
   </h1>
 </div>
