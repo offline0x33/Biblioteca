@@ -25,7 +25,10 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
     --Dockerfile
     // contem informações relacionadas ao usuario e password para acessar a aplicação bean remota.
     --application-user.properties 
-    // tem dados para levantar os containers necessários para funcionamento da aplicação, nesse caso especifico são dois um com wildfly e outro ccom banco de dados mysql.
+    /**
+     * tem dados para levantar os containers necessários para funcionamento da aplicação, 
+     * nesse caso especifico são dois um com wildfly e outro ccom banco de dados mysql.
+    */
     --docker-composer.yml
     // é referenciado pelo docker-compose para criação das tabelas no banco de dados.
     --init.sql</p>
