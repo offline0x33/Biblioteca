@@ -6,6 +6,7 @@
       <img src="https://jakarta.ee/images/jakarta/jakarta_ee_logo_schooner_color_horizontal_default.png" height="32px" alt="JakartaEE 10">
     </a>
   </h1>
+  <br />
 </div>
 
 ![github](https://img.shields.io/github/license/bajinho/Biblioteca)
@@ -118,5 +119,7 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 execute start.sh no linux.
 
 ### Referências
-https://shields.io/badges/libraries-io-dependency-status-for-git-hub-repo
-https://gitmoji.dev/
+<div>
+    <p>https://shields.io/badges/libraries-io-dependency-status-for-git-hub-repo</p>
+    <p>https://gitmoji.dev/</p>
+</div>
