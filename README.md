@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">
-    # Biblioteca
+    Projeto Biblioteca
     <br />
     <br />
     <a href="https://jakarta.ee/release/10/">
