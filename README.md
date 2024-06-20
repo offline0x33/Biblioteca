@@ -4,7 +4,7 @@
     <br />
     <br />
     <a href="https://jakarta.ee/release/10/">
-      <img src="https://jakarta.ee/images/jakarta/jakarta_ee_logo_schooner_color_horizontal_default.png" alt="JakartaEE 10">
+      <img src="https://jakarta.ee/images/jakarta/jakarta_ee_logo_schooner_color_horizontal_default.png" height="24px" alt="JakartaEE 10">
     </a>
   </h1>
 </div>
@@ -38,6 +38,7 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 ![maven](https://img.shields.io/librariesio/github/apache/maven?style=plastic&logo=maven&label=Maven)
 ![netbeans](https://img.shields.io/librariesio/github/apache/netbeans?style=plastic&logo=netbeans&label=Netbeans)
 ![openjdk/jdk](https://img.shields.io/librariesio/github/openjdk/jdk?style=plastic&logo=java&label=JDK)
+![junit5](https://img.shields.io/librariesio/github/junit-team/junit5?style=plastic&logo=junit&label=JUnit)
 
 ### Depedencias maven
 
@@ -109,12 +110,6 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
             <version>0.12.5</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-crypto</artifactId>
-            <version>6.2.4</version>
             <type>jar</type>
         </dependency>
     </dependencies>
