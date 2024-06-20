@@ -33,7 +33,8 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 
 - **Um simples inicio**
 
-Requisitos/Opcionais
+## Requisitos/Opcionais
+
 ![docker](https://img.shields.io/librariesio/github/docker-library/docker?style=plastic&logo=docker&label=Maven)
 ![docker-compose](https://img.shields.io/librariesio/github/docker/compose?style=plastic&logo=docker-compose&label=Docker-compose)
 ![maven](https://img.shields.io/librariesio/github/apache/maven?style=plastic&logo=maven&label=Maven)
