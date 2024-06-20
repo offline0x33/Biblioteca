@@ -9,8 +9,8 @@
   </h1>
 </div>
 
-![GitHub](https://img.shields.io/github/license/bajinho/Biblioteca)
-![GitHub Release Date](https://img.shields.io/github/release-date/bajinho/Biblioteca)
+![github](https://img.shields.io/github/license/bajinho/Biblioteca)
+![github Release Date](https://img.shields.io/github/release-date/bajinho/Biblioteca)
 
 ## Introdução
 
@@ -33,11 +33,11 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 
 - **Um simples inicio**
 
-Requisitos.
-![Docker](https://img.shields.io/librariesio/github/docker-library/docker?logo=docker)
-![Docker-compose](https://img.shields.io/librariesio/github/docker/compose)
---maven
---nesse projeto estou usando Netbeans, mas você pode usar o de sua preferencia
---jdk versão atual, neste momento estou usando versão 22
+Requisitos/Opcionais
+![docker](https://img.shields.io/librariesio/github/docker-library/docker?style=plastic&logo=docker&label=Maven)
+![docker-compose](https://img.shields.io/librariesio/github/docker/compose?style=plastic&logo=docker-compose&label=Docker-compose)
+![maven](https://img.shields.io/librariesio/github/apache/maven?style=plastic&logo=maven&label=Maven)
+![netbeans](https://img.shields.io/librariesio/github/apache/netbeans?style=plastic&logo=netbeans&label=Netbeans)
+![openjdk/jdk](https://img.shields.io/librariesio/github/openjdk/jdk?style=plastic&logo=java&label=JDK)
 
 execute start.sh no linux.
