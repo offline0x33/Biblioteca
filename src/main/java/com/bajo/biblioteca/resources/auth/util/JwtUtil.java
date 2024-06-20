@@ -9,14 +9,11 @@ import com.bajo.biblioteca.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.lang.Function;
-//import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.AeadAlgorithm;
 import io.jsonwebtoken.security.InvalidKeyException;
 import io.jsonwebtoken.security.KeyAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.Password;
-//import jakarta.annotation.security.DeclareRoles;
-//import io.jsonwebtoken.security.Keys;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -32,8 +29,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-//@ApplicationScoped
-//@DeclareRoles({"Users, ViewBalance", "Debtor", "Creditor", "Debtor2", "BigSpender"})
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -127,7 +122,7 @@ public class JwtUtil {
 //            claims = null;
 //        }
 //        return claims;
-        return (Claims) Jwts.parser()
+        return Jwts.parser()
                 .decryptWith(password).build()
                 .parseEncryptedClaims(token)
                 .getBody();
