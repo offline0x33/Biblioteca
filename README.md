@@ -1,5 +1,3 @@
-[![Logo][logo]][repo]
-
 <div align="center">
   <h1 align="center">
     Projeto Biblioteca
@@ -23,8 +21,8 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
 
 ```java
 --docker
-    |
-    --Dockerfile</p>
+   |
+    --Dockerfile
     --application-user.properties
     --docker-composer.yml
     --init.sql</p>
@@ -32,8 +30,6 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
     --mysql-coonector-java-8.1.0.jar
     --standalone.xml
 ```
-
-- **Um simples inicio**
 
 ## Requisitos/Opcionais
 
@@ -123,5 +119,10 @@ Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java
         </dependency>
     </dependencies>
 ```
+- **Um simples inicio**
 
 execute start.sh no linux.
+
+### Referências
+https://shields.io/badges/libraries-io-dependency-status-for-git-hub-repo
+https://gitmoji.dev/
