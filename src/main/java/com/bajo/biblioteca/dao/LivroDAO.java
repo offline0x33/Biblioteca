@@ -52,7 +52,7 @@ public class LivroDAO {
           ele existe na base. */
                 if (entityManager.find(Livro.class, livro.getId())
                         == null) {
-                    throw new Exception("Livro não existe!");
+                    throw new Exception("Livro existe!");
                 }
             }
             /* Faz uma atualização do livro que estava gravado na base

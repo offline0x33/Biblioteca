@@ -19,7 +19,7 @@ Biblioteca é um projeto de apredizagem da tecnlogia JakartaEE em sua versão 10
 Um breve resumo desse pequeno projeto, ele roda em um servidor de aplição Java chamado Wildfly na versão 32.0.1.Final encapsulado em um container docker, por sua vez temos o Docckerfile com todas a variaveis para criação da imagem de uma distruição contendo o wildfly e todos os recusos necessários para subir aplicação, incluindo nessa configuração aplicação Java compilada war. Listando abaixo temos:
 
 
-```java
+```txt
 --docker
    |
     --Dockerfile

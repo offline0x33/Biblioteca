@@ -30,3 +30,6 @@ replay_pid*
 /nbactions.xml
 /target
 /nbproject/
+/classes/
+/biblioteca-ejb/
+/biblioteca-ear/

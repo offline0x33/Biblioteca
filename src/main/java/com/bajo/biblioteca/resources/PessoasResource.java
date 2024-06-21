@@ -64,7 +64,7 @@ public class PessoasResource {
      */
     @GET
     @Path("{name}")
-    public Response getUser(@PathParam("name") String name) {
+    public Response getPessoa(@PathParam("name") String name) {
         PessoaDAO dao = new PessoaDAO(em);
         return Response.ok(dao.consultarPorNome(name)).build();
     }

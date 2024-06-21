@@ -89,7 +89,6 @@ public class JwtUtil {
                         .expiration(expiration)
                         .claim("groups", groups)
                         .encryptWith(password, alg, enc)
-                        //                        .signWith(getSignInKey())
                         .compact();
 
                 return Response.status(Response.Status.OK).entity(jwtToken).build();
@@ -111,21 +110,10 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-//        Claims claims;
-//        try {
-//            claims = Jwts.parser()
-//                    .decryptWith(password).build()
-//                    .parseEncryptedClaims(token)
-//                    .getBody();
-//        } catch (Exception e) {
-////            LOGGER.error("Could not get all claims Token from passed token");
-//            claims = null;
-//        }
-//        return claims;
         return Jwts.parser()
                 .decryptWith(password).build()
                 .parseEncryptedClaims(token)
-                .getBody();
+                .getPayload();
     }
 
     /**
@@ -143,12 +131,10 @@ public class JwtUtil {
     @POST
     @Path("/validate/{token}")
     public Response validate(@PathParam("token") String token, Login login) {
-//        if (token.length() == 32) {
         final String user = extractUser(token);
         if (user.equals(login.getEmail()) && !isTokenExpired(token)) {
             return Response.ok("valido").build();
         }
-//        }
         return Response.ok("invalido").build();
     }
 

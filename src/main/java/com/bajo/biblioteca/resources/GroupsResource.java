@@ -4,8 +4,8 @@
  */
 package com.bajo.biblioteca.resources;
 
-import com.bajo.biblioteca.dao.EmprestimoDAO;
-import com.bajo.biblioteca.model.Emprestimo;
+import com.bajo.biblioteca.dao.GroupDAO;
+import com.bajo.biblioteca.model.Group;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -22,64 +22,65 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 /**
- *  19-06-2024
- *  EmprestimoController
+ *  21-06-2024
+ *  GroupController
  * 
- *  Endpoint: http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/emprestimo
+ *  Endpoint: http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/group
  *
  * @author bajinho
  */
+
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/emprestimo")
-public class EmprestimosResource {
+@Path("/group")
+public class GroupsResource {
 
     @PersistenceContext
     private EntityManager em;
 
     /**
-     * 19-06-2024
+     * 21-06-2024
      *
-     * Retorna todos os emprestimos registradas no banco de dados.
+     * Retorna todos os grupos registrados no banco de dados.
      *
      * @return Reponse 200
      */
     @GET
     public Response getAll() {
-        EmprestimoDAO dao = new EmprestimoDAO(em);
+        GroupDAO dao = new GroupDAO(em);
         return Response.ok(dao.getAll()).build();
     }
 
     /**
-     * 19-06-2024
+     * 21-06-2024
      *
-     * Retorna o(s) emprestimo(s) passado no parametro titulo.
-     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/emprestimo/titulo
+     * Retorna o grupo passado no parametro name.
+     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/group/name
      *
-     * @param titulo
+     * @param name
      * @return Response 200 + Json.
      */
     @GET
-    @Path("{titulo}")
-    public Response getEmprestimo(@PathParam("titulo") String titulo) {
-        EmprestimoDAO dao = new EmprestimoDAO(em);
-        return Response.ok(dao.consultarPorTitulo(titulo)).build();
+    @Path("{name}")
+    public Response getPessoa(@PathParam("name") String name) {
+        GroupDAO dao = new GroupDAO(em);
+        return Response.ok(dao.consultarPorNome(name)).build();
     }
 
     /**
-     * 19-06-2024
+     * 21-06-2024
      *
-     * Cria registro do tipo emprestimo com os dados passado pelo corpo Json.
-     *
-     * @param emprestimo
+     * Cria registro do tipo grupo com os dados passado pelo corpo Json.
+     * 
+     * @param grupo
      * @return Response 201 to created.
      * @throws Exception
      */
     @POST
-    public Response create(Emprestimo emprestimo) throws Exception {
-        EmprestimoDAO dao = new EmprestimoDAO(em);
-        dao.salvar(emprestimo);
+    public Response create(Group grupo) throws Exception {
+        GroupDAO dao = new GroupDAO(em);
+        dao.salvar(grupo);
         return Response
                 .ok()
                 .status(HttpServletResponse.SC_CREATED)
@@ -87,11 +88,11 @@ public class EmprestimosResource {
     }
 
     /**
-     * 19-06-2024
+     * 21-06-2024
      *
-     * Exclui um registro do tipo emprestimo com o id passado como parametro.
-     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/emprestimo/id
-     *
+     * Exclui um registro do tipo grupo com o id passado como parametro.
+     * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/group/id
+     * 
      * @param id
      * @return Response 201.
      * @throws Exception
@@ -99,23 +100,23 @@ public class EmprestimosResource {
     @DELETE
     @Path("{id}")
     public Response excluir(@PathParam("id") Long id) throws Exception {
-        EmprestimoDAO dao = new EmprestimoDAO(em);
+        GroupDAO dao = new GroupDAO(em);
         dao.excluir(id);
         return Response.ok().build();
     }
 
     /**
      *  19-06-2024
-     *  Modifica um registro do tipo emprestimo com os dados passados pelo Json.
+     *  Modifica um registro do tipo grupo com os dados passados pelo Json.
      * 
-     * @param emprestimo
+     * @param grupo
      * @return Response 200.
      * @throws Exception
      */
     @PUT
-    public Response editar(Emprestimo emprestimo) throws Exception {
-        EmprestimoDAO dao = new EmprestimoDAO(em);
-        dao.salvar(emprestimo);
+    public Response editar(Group grupo) throws Exception {
+        GroupDAO dao = new GroupDAO(em);
+        dao.salvar(grupo);
         return Response.ok().build();
     }
 }

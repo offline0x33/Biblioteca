@@ -52,7 +52,7 @@ public class PessoaDAO {
           se ele existe na base. */
                 if (entityManager.find(Pessoa.class, pessoa.getId())
                         == null) {
-                    throw new Exception("Pessoa não existe!");
+                    throw new Exception("Pessoa existe!");
                 }
             }
             /* Faz uma atualização da pessoa que estava gravado na 
