@@ -14,6 +14,7 @@ import io.jsonwebtoken.security.InvalidKeyException;
 import io.jsonwebtoken.security.KeyAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.Password;
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -33,7 +34,7 @@ import java.util.Date;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/auth")
-//@DenyAll
+@DeclareRoles("user")
 public class JwtUtil {
 
     private final Password password;
@@ -63,7 +64,7 @@ public class JwtUtil {
     }
 
     @POST
-    @Path("/login")   
+    @Path("/login")
     public Response generateToken(Login usuario) {
         try {
             UserDAO dao = new UserDAO(em);
@@ -72,22 +73,23 @@ public class JwtUtil {
             boolean hashPw = HashPassword.checkPassword(usuario.getPassword(), users.getPassword());
 
             if (hashPw) {
-                String subject = users.getEmail();
                 Date now = new Date();
                 Date expiration = Date
                         .from(LocalDateTime.now()
                                 .plusMinutes(60000L)
                                 .atZone(ZoneId.systemDefault())
                                 .toInstant());
-                
+
                 String[] groups = {users.getAuthorities()};
 
                 jwtToken = Jwts.builder()
-                        .subject(subject)
+                        .subject(users.getEmail())
                         .issuer("localhost:8080")
                         .issuedAt(now)
                         .expiration(expiration)
-                        .claim("groups", groups)
+                        .claim("roles", groups)
+                        .claim("name", users.getUsername())
+                        .claim("email", users.getEmail())
                         .encryptWith(password, alg, enc)
                         .compact();
 
@@ -133,7 +135,12 @@ public class JwtUtil {
     public Response validate(@PathParam("token") String token, Login login) {
         final String user = extractUser(token);
         if (user.equals(login.getEmail()) && !isTokenExpired(token)) {
-            return Response.ok("valido").build();
+
+            return Response.ok(Jwts.parser()
+                    .decryptWith(password).build()
+                    .parseEncryptedClaims(token)
+                    .getPayload())
+                    .build();
         }
         return Response.ok("invalido").build();
     }

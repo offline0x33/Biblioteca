@@ -6,6 +6,8 @@ package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.PessoaDAO;
 import com.bajo.biblioteca.model.Pessoa;
+import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -33,7 +35,6 @@ import jakarta.ws.rs.core.Response;
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-//@DeclareRoles("user")
 @Path("/pessoa")
 public class PessoasResource {
 
@@ -48,6 +49,7 @@ public class PessoasResource {
      * @return Reponse 200
      */
     @GET
+    @RolesAllowed("admin")
     public Response getAll() {
         PessoaDAO dao = new PessoaDAO(em);
         return Response.ok(dao.getAll()).build();
