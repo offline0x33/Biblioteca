@@ -22,10 +22,10 @@ public class PasswordJwtToken {
     }
 
     public Password getPassword() {
-        return password;
+        return this.password;
     }
 
     public String getKeyToken() {
-        return keyToken;
+        return this.keyToken;
     }
 }

@@ -5,7 +5,6 @@
 package com.bajo.biblioteca.resources.auth;
 
 import com.bajo.biblioteca.resources.auth.jwt.TokenValidator;
-import com.bajo.biblioteca.resources.auth.util.JwtUtil;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.NotAuthorizedException;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -19,11 +18,6 @@ import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  *
@@ -44,14 +38,10 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  *
  * @PreMatching como anotação:
  */
-
 @Provider
 @PreMatching
 @RequestScoped
-public class AuthInterceptor implements ContainerRequestFilter, ContainerResponseFilter {
-
-    // Class responsavel por gerar jwt
-    private TokenValidator validator;
+public class AuthInterceptor extends TokenValidator implements ContainerRequestFilter, ContainerResponseFilter {
 
     private static final Logger logger
             = Logger.getLogger("com.bajo.biblioteca.resources.auth.AuthInterceptor");
@@ -59,6 +49,9 @@ public class AuthInterceptor implements ContainerRequestFilter, ContainerRespons
     private static final String REALM = "localhost";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
 
+    public AuthInterceptor() {
+        
+    }
 
     /**
      * Incoming (request) filter
@@ -80,7 +73,7 @@ public class AuthInterceptor implements ContainerRequestFilter, ContainerRespons
                 try {
 
                     // Validate the token
-                    validator.verifyToken(token);
+                    verifyToken(token);
 
                 } catch (Exception e) {
                     logger.log(Level.INFO, "Get request: " + e + "token: " + token, requestContext.getMethod());
@@ -94,9 +87,6 @@ public class AuthInterceptor implements ContainerRequestFilter, ContainerRespons
 
     }
 
-//    private boolean isValid(String token) {
-//        return token != null && !token.isBlank();
-//    }
 
     private void abortWithUnauthorized(ContainerRequestContext requestContext) {
 
@@ -116,27 +106,5 @@ public class AuthInterceptor implements ContainerRequestFilter, ContainerRespons
     @Override
     public void filter(ContainerRequestContext crc, ContainerResponseContext crc1) throws IOException {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public UserDetailsService users(User u) {
-
-        @SuppressWarnings("deprecation")
-        UserBuilder users = User.withDefaultPasswordEncoder();
-
-        UserDetails user = users
-                .username(u.getUsername())
-                .password(u.getPassword())
-                .roles("USER")
-                .authorities("READ")
-                .build();
-
-//        UserDetails admin = users
-//                .username("admin")
-//                .password("password")
-//                .roles("ADMIN")
-//                .authorities("READ", "CREATE", "DELETE")
-//                .build();
-
-        return new InMemoryUserDetailsManager(user);
     }
 }
