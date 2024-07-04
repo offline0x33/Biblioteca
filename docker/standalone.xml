@@ -34,7 +34,10 @@
         <extension module="org.wildfly.extension.io"/>
         <extension module="org.wildfly.extension.metrics"/>
         <extension module="org.wildfly.extension.microprofile.config-smallrye"/>
+        <extension module="org.wildfly.extension.microprofile.fault-tolerance-smallrye"/>
+        <extension module="org.wildfly.extension.microprofile.health-smallrye"/>
         <extension module="org.wildfly.extension.microprofile.jwt-smallrye"/>
+        <extension module="org.wildfly.extension.microprofile.openapi-smallrye"/>
         <extension module="org.wildfly.extension.request-controller"/>
         <extension module="org.wildfly.extension.security.manager"/>
         <extension module="org.wildfly.extension.undertow"/>
@@ -59,11 +62,18 @@
                 <socket-binding http="management-http"/>
             </http-interface>
         </management-interfaces>
-        <access-control provider="simple">
+        <access-control provider="rbac">
             <role-mapping>
                 <role name="SuperUser">
                     <include>
                         <user name="$local"/>
+                    </include>
+                </role>
+                
+                <role name="Administrator">
+                    <include>
+                        <user name="$local"/>
+                        <user name="admin"/>
                     </include>
                 </role>
             </role-mapping>
@@ -151,7 +161,7 @@
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
-<!--                    <driver name="postgresql" module="org.postgresql">
+                    <!--                    <driver name="postgresql" module="org.postgresql">
                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
                     </driver>-->
                     <driver name="mysql" module="com.mysql">
@@ -459,9 +469,11 @@
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
         </subsystem>
-        <subsystem xmlns="urn:wildfly:metrics:1.0" security-enabled="false" exposed-subsystems="*" prefix="${wildfly.metrics.prefix:wildfly}"/>
         <subsystem xmlns="urn:wildfly:microprofile-config-smallrye:2.0"/>
+        <subsystem xmlns="urn:wildfly:microprofile-fault-tolerance-smallrye:1.0"/>
+        <subsystem xmlns="urn:wildfly:microprofile-health-smallrye:3.0" security-enabled="false" empty-liveness-checks-status="${env.MP_HEALTH_EMPTY_LIVENESS_CHECKS_STATUS:UP}" empty-readiness-checks-status="${env.MP_HEALTH_EMPTY_READINESS_CHECKS_STATUS:UP}" empty-startup-checks-status="${env.MP_HEALTH_EMPTY_STARTUP_CHECKS_STATUS:UP}"/>
         <subsystem xmlns="urn:wildfly:microprofile-jwt-smallrye:1.0"/>
+        <subsystem xmlns="urn:wildfly:microprofile-openapi-smallrye:1.0"/>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
             <remote-naming/>
         </subsystem>

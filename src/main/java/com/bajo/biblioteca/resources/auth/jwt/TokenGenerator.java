@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+//import org.eclipse.microprofile.jwt.JsonWebToken;
 
 /**
  * 22-06-2024
@@ -28,7 +29,7 @@ public class TokenGenerator extends PasswordJwtToken {
     // Chooose the Encryption Algorithm used to encrypt the payload:
     private final AeadAlgorithm enc = Jwts.ENC.A256CBC_HS512;
 
-    public String generateToken(User users) {
+    public String generateToken(User user) {
 
         Date now = new Date();
         Date expiration = Date
@@ -38,18 +39,22 @@ public class TokenGenerator extends PasswordJwtToken {
                         .toInstant());
 
         Set<String> groups = new HashSet<>();
-        groups.add(users.getAuthorities());
+        groups.add(user.getAuthorities());
 
         return Jwts.builder()
-                .subject(users.getEmail())
+                .subject(user.getEmail())
                 .issuer("localhost:8080")
                 .issuedAt(now)
                 .expiration(expiration)
-                .claim("groups", groups)
-                .claim("name", users.getUsername())
-                .claim("email", users.getEmail())
+                .claim("roles", groups)
+                .claim("name", user.getUsername())
+                .claim("email", user.getEmail())
                 .encryptWith(getPassword(), alg, enc)
                 .compact();
     }
+
+//    public String generateTokenMP(User user) {
+//        return mpJwt. .generateToken(user.getEmail(), 3600);
+//    }
 
 }

@@ -23,7 +23,7 @@ public class TokenParser extends PasswordJwtToken {
         return claimsResolver.apply(claims);
     }
 
-    private Claims parseClaims(String token) {
+    public Claims parseClaims(String token) {
         return Jwts.parser()
                 .decryptWith(getPassword()).build()
                 .parseEncryptedClaims(token)

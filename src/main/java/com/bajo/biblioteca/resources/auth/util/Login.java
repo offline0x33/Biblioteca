@@ -5,12 +5,17 @@
 package com.bajo.biblioteca.resources.auth.util;
 
 import java.io.Serializable;
+import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
  * @author bajinho
  */
 public class Login implements Serializable {
+
+//    public Login(String username, String password1, List<GrantedAuthority> authorities) {
+//    }
 
     private static final long serialVersionUID = 1L;
 

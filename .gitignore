@@ -33,3 +33,4 @@ replay_pid*
 /classes/
 /biblioteca-ejb/
 /biblioteca-ear/
+/docker/wildfly/

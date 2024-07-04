@@ -6,9 +6,6 @@ package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.PessoaDAO;
 import com.bajo.biblioteca.model.Pessoa;
-import jakarta.annotation.security.DeclareRoles;
-import jakarta.annotation.security.DenyAll;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -23,22 +20,22 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.jboss.logging.Logger;
 
 /**
- *  05-06-2024
- *  PessoaController
- * 
- *  Endpoint: http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/pessoa
+ * 05-06-2024 PessoaController
+ *
+ * Endpoint: http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/pessoa
  *
  * @author bajinho
  */
 @RequestScoped
-@DeclareRoles({"admin", "user"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/pessoa")
-@DenyAll
 public class PessoasResource {
+
+    private static final Logger logger = Logger.getLogger(PessoasResource.class);
 
     @PersistenceContext
     private EntityManager em;
@@ -51,9 +48,9 @@ public class PessoasResource {
      * @return Reponse 200
      */
     @GET
-    @RolesAllowed("admin")
     public Response getAll() {
         PessoaDAO dao = new PessoaDAO(em);
+        logger.info("\r\nRetorna todas pessoa cadastrada: \r\n" + dao.getAll() + "\r\n");
         return Response.ok(dao.getAll()).build();
     }
 
@@ -67,7 +64,6 @@ public class PessoasResource {
      * @return Response 200 + Json.
      */
     @GET
-    @RolesAllowed("user")
     @Path("{name}")
     public Response getPessoa(@PathParam("name") String name) {
         PessoaDAO dao = new PessoaDAO(em);
@@ -78,7 +74,7 @@ public class PessoasResource {
      * 19-06-2024
      *
      * Cria registro do tipo pessoa com os dados passado pelo corpo Json.
-     * 
+     *
      * @param pessoa
      * @return Response 201 to created.
      * @throws Exception
@@ -98,7 +94,7 @@ public class PessoasResource {
      *
      * Exclui um registro do tipo pessoa com o id passado como parametro.
      * http://localhost:8080/biblioteca-1.0-SNAPSHOT/resources/pessoa/id
-     * 
+     *
      * @param id
      * @return Response 201.
      * @throws Exception
@@ -112,9 +108,9 @@ public class PessoasResource {
     }
 
     /**
-     *  19-06-2024
-     *  Modifica um registro do tipo pessoa com os dados passados pelo Json.
-     * 
+     * 19-06-2024 Modifica um registro do tipo pessoa com os dados passados pelo
+     * Json.
+     *
      * @param pessoa
      * @return Response 200.
      * @throws Exception
