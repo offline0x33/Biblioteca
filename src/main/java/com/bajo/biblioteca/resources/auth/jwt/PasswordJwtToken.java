@@ -8,7 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.Password;
 
 /**
- *
+ * 24-06-2024
  * @author bajinho
  */
 public class PasswordJwtToken {

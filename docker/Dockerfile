@@ -11,7 +11,7 @@ ADD mysql-connector-java-8.1.0.jar /opt/jboss/wildfly/modules/system/layers/base
 #ADD pgsql/postgresql-42.3.1.jar /opt/jboss/wildfly/modules/system/layers/base/org/postgresql/main/ 
 ADD standalone.xml /opt/jboss/wildfly/standalone/configuration/
 ADD biblioteca-1.0-SNAPSHOT.war /opt/jboss/wildfly/standalone/deployments/
-# ADD application-users.properties  /opt/jboss/wildfly//standalone/configurations/
+#ADD application-users.properties  /opt/jboss/wildfly/standalone/configurations/
 
 LABEL org.opencontainers.image.source=https://github.com/jboss-dockerfiles/wildfly org.opencontainers.image.title=wildfly org.opencontainers.imag.url=https://github.com/jboss-dockerfiles/wildfly org.opencontainers.image.vendor=WildFly
 
