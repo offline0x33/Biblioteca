@@ -14,27 +14,32 @@ import jakarta.ws.rs.container.ContainerResponseFilter;
 import jakarta.ws.rs.container.PreMatching;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
+/** 
+ * created 05-06-2024
+ * 
  * @author bajinho
  *
+ * <p>
  * Simplificando, os filtros permitem modificar as propriedades das solicitações
  * e respostas – por exemplo, cabeçalhos HTTP. Os filtros podem ser aplicados
  * tanto no lado do servidor quanto no lado do cliente. Tenha em mente que os
  * filtros são sempre executados, independentemente de o recurso ter sido
- * encontrado ou não.
- *
+ * encontrado ou não.</p>
+ * </br>
  */
 /**
+ * <p>
  * Implementando o ContainerRequestFilter interface e registrá-lo como um
  * Provedor em nossa api Rest. Caso queiramos executar um filtro antes da
  * correspondência de recursos, podemos usar um filtro de pré-correspondência
- * anotando nosso filtro com o
+ * anotando nosso filtro com o</p>
+ * </br>
  *
  * @PreMatching como anotação:
  */
@@ -46,12 +51,8 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
     private static final Logger logger
             = Logger.getLogger("com.bajo.biblioteca.resources.auth.AuthInterceptor");
 
-    private static final String REALM = "localhost";
+    private static final String REALM = "ApplicationRealm";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
-
-    public AuthInterceptor() {
-        
-    }
 
     /**
      * Incoming (request) filter
@@ -65,18 +66,65 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
             // JWT authentication logic
             // Get the Authorization header from the request
             String authHeader = requestContext.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            // Get access to the URI information
+            UriInfo uriInfo = requestContext.getUriInfo();
 
+            /**
+             *  04-07-2024
+             *  Extract the path 
+             *  
+             *  exemplo:
+             *  path /pessoas/bajinho
+             *  
+             *  Agora, o array path conterá os seguintes valores:
+             *
+             * 1. "" (uma string vazia, pois a rota começa com “/”) 
+             * 2. "pessoas"
+             * 3. "bajinho"
+             * 
+             */
+            String[] path = uriInfo.getPath().split("/");
+
+            // Optional: Handle leading or trailing slashes
+//            if (path.startsWith("/")) {
+//                path = path.substring(1); // Remove leading slash
+//            }
+//            if (path.endsWith("/")) {
+//                path = path.substring(0, path.length() - 1); // Remove trailing slash
+//            }
             if (authHeader != null) {
                 String token = authHeader
                         .substring(AUTHENTICATION_SCHEME.length() + 1).trim();
 
                 try {
-
                     // Validate the token
-                    verifyToken(token);
+                    boolean verifyToken = verifyToken(token);
+                    if (verifyToken) {
+                        switch (path[1]) {
+                            case "pessoa":
+                                if (isPermitted(token, "user") == false) {
+                                    abortWithUnauthorized(requestContext);
+                                }
+                                Response.accepted();
+                                break;
+                            case "users":
+                                if (isPermitted(token, "admin") == false) {
+                                    abortWithUnauthorized(requestContext);
+                                }
+                                Response.accepted();
+                                break;
+                            default:
+                                // Página não encontrada
+                                Response.status(Response.Status.NOT_FOUND);
+                                break;
+                        }
+                    } else {
+                        abortWithUnauthorized(requestContext);
+                    }
 
+                    logger.log(Level.INFO, "Get request: --path: " + path[1] + " --token: " + verifyToken + " --permitido: " + isPermitted(token, "user"), requestContext.getMethod() + "  " + verifyToken);
                 } catch (Exception e) {
-                    logger.log(Level.INFO, "Get request: " + e + "token: " + token, requestContext.getMethod());
+                    logger.log(Level.INFO, "Get request: " + e + "path: " + path[1], requestContext.getMethod());
                     abortWithUnauthorized(requestContext);
                 }
             } else {
@@ -86,7 +134,6 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
         }
 
     }
-
 
     private void abortWithUnauthorized(ContainerRequestContext requestContext) {
 
@@ -100,9 +147,6 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
                         .build());
     }
 
-    /**
-     * Outbound (response) filter
-     */
     @Override
     public void filter(ContainerRequestContext crc, ContainerResponseContext crc1) throws IOException {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
