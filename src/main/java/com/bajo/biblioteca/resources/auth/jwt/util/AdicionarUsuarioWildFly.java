@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.biblioteca.resources.auth.util;
+package com.bajo.biblioteca.resources.auth.jwt.util;
 
 import com.bajo.biblioteca.dao.UserDAO;
 import com.bajo.biblioteca.model.User;
@@ -21,6 +21,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
+ * @created
+ * 
+ * @updated 
+ * 17-06-2024 - changed for package com.bajo.biblioteca.resources.auth.jwt.util;
+ *
  *
  * @author bajinho
  */

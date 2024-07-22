@@ -24,7 +24,7 @@ public class LivroBean implements LivroRemote {
     private static final Logger logger
             = Logger.getLogger("com.bajo.mavenproject1.bean.LivroBean");
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "bibliotecaPU")
     private EntityManager em;
 
     @Override

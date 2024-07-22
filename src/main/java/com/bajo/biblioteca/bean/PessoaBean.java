@@ -26,7 +26,7 @@ public class PessoaBean implements PessoaRemote {
 
 //    @PersistenceContext(unitName = "bibliotecaPU")
 //    private EntityManager em;
-    @PersistenceContext
+    @PersistenceContext(unitName = "bibliotecaPU")
     private EntityManager em;
 
     @Override

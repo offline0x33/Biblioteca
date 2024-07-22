@@ -23,7 +23,7 @@ import java.util.Date;
  * @author bajinho
  */
 @Entity
-@Table(name = "emprestimo_view", catalog = "biblioteca", schema = "")
+@Table(name = "view_emprestimo")
 @NamedQueries({
     @NamedQuery(name = "EmprestimoView.findAll", query = "SELECT e FROM EmprestimoView e"),
     @NamedQuery(name = "EmprestimoView.findById", query = "SELECT e FROM EmprestimoView e WHERE e.id = :id"),

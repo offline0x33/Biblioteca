@@ -77,11 +77,11 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
              *  path /pessoas/bajinho
              *  
              *  Agora, o array path conterá os seguintes valores:
-             *
-             * 1. "" (uma string vazia, pois a rota começa com “/”) 
-             * 2. "pessoas"
-             * 3. "bajinho"
-             * 
+             * <ol>
+             *    <li>1. "" (uma string vazia, pois a rota começa com “/”) 
+             *    <li>2. "pessoas"
+             *    <li>3. "bajinho"
+             * </ol>
              */
             String[] path = uriInfo.getPath().split("/");
 
@@ -132,6 +132,7 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
                 throw new NotAuthorizedException("Bearer error=\"invalid_token\"");
             }
         }
+        Response.accepted();
 
     }
 

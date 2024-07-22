@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.biblioteca.resources.auth.util;
+package com.bajo.biblioteca.resources.auth.jwt.util;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -12,11 +12,13 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
  */
 public class HashPassword {
 
+    private static boolean password_verified = false;
+
     /**
      * @link https://gist.github.com/craSH/ 12 jun 2024
      */
     // Define the BCrypt workload to use when generating password hashes. 10-31 is a valid value.
-    private static int workload = 12;
+    private static final int workload = 12;
 
     /**
      * This method can be used to generate a string representing an account
@@ -51,7 +53,6 @@ public class HashPassword {
      * hash, false otherwise
      */
     public static boolean checkPassword(String password_plaintext, String stored_hash) {
-        boolean password_verified = false;
 
         if (null == stored_hash || !stored_hash.startsWith("$2a$")) {
             throw new java.lang.IllegalArgumentException("Invalid hash provided for comparison");

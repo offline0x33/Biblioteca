@@ -24,7 +24,7 @@ public class GroupBean implements GroupRemote {
     private static final Logger logger
             = Logger.getLogger("com.bajo.biblioteca.bean.GroupBean");
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "bibliotecaPU")
     private EntityManager em;
     
     @Override

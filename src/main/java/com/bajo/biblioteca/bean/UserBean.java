@@ -26,7 +26,7 @@ public class UserBean implements UserRemote {
 
 //    @PersistenceContext(unitName = "bibliotecaPU")
 //    private EntityManager em;
-    @PersistenceContext
+    @PersistenceContext(unitName = "bibliotecaPU")
     private EntityManager em;
 
     @Override
@@ -62,5 +62,12 @@ public class UserBean implements UserRemote {
         UserDAO dao = new UserDAO(em);
         logger.log(Level.INFO, "Retorna todas usuario cadastrada: ", dao.getAll());
         return dao.getAll();
+    }
+
+    @Override
+    public User consultarPorEmail(String nome) {
+        UserDAO dao = new UserDAO(em);
+        logger.log(Level.INFO, "Consultar usuário por email: ", dao.consultarPorEmail(nome));
+        return dao.consultarPorEmail(nome);
     }
 }

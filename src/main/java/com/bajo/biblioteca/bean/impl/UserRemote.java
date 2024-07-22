@@ -24,5 +24,7 @@ public interface UserRemote {
     
     public List<User> consultarPorNome(String nome);
     
+    public User consultarPorEmail(String nome);
+    
     public List<User> getAll();
 }

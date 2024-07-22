@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @author bajinho
  */
 @Entity
-@Table(name = "user", catalog = "biblioteca", schema = "")
+@Table(name = "tb_user")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
@@ -59,6 +59,21 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "email")
     private String email;
+    
+    public User(String username, String password, String email, String authorities) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+    }
+
+//    public User(Long id, String username, String password, String email, String authorities) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//        this.authorities = authorities;
+//    }
 
     public String getAuthorities() {
         return authorities;

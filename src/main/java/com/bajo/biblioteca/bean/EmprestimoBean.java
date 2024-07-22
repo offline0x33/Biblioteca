@@ -25,7 +25,7 @@ public class EmprestimoBean implements EmprestimoRemote {
     private static final Logger logger
             = Logger.getLogger("com.bajo.mavenproject1.bean.EmprestimoBean");
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "bibliotecaPU")
     private EntityManager em;
 
     @Override

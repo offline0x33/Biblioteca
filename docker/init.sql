@@ -20,9 +20,9 @@ USE `biblioteca` ;
 -- -----------------------------------------------------
 -- Table `biblioteca`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `biblioteca`.`user` ;
+DROP TABLE IF EXISTS `biblioteca`.`tb_user` ;
 
-CREATE TABLE IF NOT EXISTS `biblioteca`.`user` (
+CREATE TABLE IF NOT EXISTS `biblioteca`.`tb_user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(256) NOT NULL,
   `password` VARCHAR(1024) NOT NULL,
@@ -37,9 +37,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `biblioteca`.`group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `biblioteca`.`group` ;
+DROP TABLE IF EXISTS `biblioteca`.`tb_group` ;
 
-CREATE TABLE IF NOT EXISTS `biblioteca`.`group` (
+CREATE TABLE IF NOT EXISTS `biblioteca`.`tb_group` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(256) NOT NULL,
   `username` VARCHAR(256) NOT NULL,
@@ -52,9 +52,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `biblioteca`.`emprestimo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `biblioteca`.`emprestimo` ;
+DROP TABLE IF EXISTS `biblioteca`.`tb_emprestimo` ;
 
-CREATE TABLE IF NOT EXISTS `biblioteca`.`emprestimo` (
+CREATE TABLE IF NOT EXISTS `biblioteca`.`tb_emprestimo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `dataemprestimo` DATE NULL DEFAULT NULL,
   `datadevolucao` DATE NULL DEFAULT NULL,
@@ -65,12 +65,12 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`emprestimo` (
   INDEX `fk_emprestimo_pessoa1_idx` (`pessoa_id` ASC) VISIBLE,
   CONSTRAINT `fk_emprestimo_livro`
     FOREIGN KEY (`livro_id`)
-    REFERENCES `biblioteca`.`livro` (`id`)
+    REFERENCES `biblioteca`.`tb_livro` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_emprestimo_pessoa`
     FOREIGN KEY (`pessoa_id`)
-    REFERENCES `biblioteca`.`pessoa` (`id`)
+    REFERENCES `biblioteca`.`tb_pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -82,9 +82,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `biblioteca`.`livro`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `biblioteca`.`livro` ;
+DROP TABLE IF EXISTS `biblioteca`.`tb_livro` ;
 
-CREATE TABLE IF NOT EXISTS `biblioteca`.`livro` (
+CREATE TABLE IF NOT EXISTS `biblioteca`.`tb_livro` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(100) NOT NULL,
   `autor` VARCHAR(100) NOT NULL,
@@ -99,9 +99,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `biblioteca`.`pessoa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `biblioteca`.`pessoa` ;
+DROP TABLE IF EXISTS `biblioteca`.`tb_pessoa` ;
 
-CREATE TABLE IF NOT EXISTS `biblioteca`.`pessoa` (
+CREATE TABLE IF NOT EXISTS `biblioteca`.`tb_pessoa` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
@@ -121,21 +121,21 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- User
 -- -----------------------------------------------------
-INSERT INTO `biblioteca`.`user` (`username`, `password`, `email`, `authorities`)
+INSERT INTO `biblioteca`.`tb_user` (`username`, `password`, `email`, `authorities`)
 VALUES 
     ("jhon", "$2a$12$xgG4AjFe4WNDbotwOs1w3e.1e3/iZOdyEdui2fQ01J0Vk5wRsyQf6", "jhon@biblioteca.com", "user");
 
 -- -----------------------------------------------------
 -- Group
 -- -----------------------------------------------------
-INSERT INTO `biblioteca`.`group` (`name`, `username`)
+INSERT INTO `biblioteca`.`tb_group` (`name`, `username`)
 VALUES 
     ("user", "jhon");
 
 -- -----------------------------------------------------
 -- Pessoa
 -- -----------------------------------------------------
-INSERT INTO `biblioteca`.`pessoa` (`nome`)
+INSERT INTO `biblioteca`.`tb_pessoa` (`nome`)
 VALUES 
     ("bajinho"),
     ("Maria");
@@ -143,32 +143,32 @@ VALUES
 -- -----------------------------------------------------
 -- Livro
 -- -----------------------------------------------------
-INSERT INTO `biblioteca`.`livro` (`titulo`, `autor`, `emprestado`)
+INSERT INTO `biblioteca`.`tb_livro` (`titulo`, `autor`, `emprestado`)
 VALUES ("Java Para Leigos", " Barry Burd", 1);
 
 -- -----------------------------------------------------
 -- Emprestimo
 -- -----------------------------------------------------
-INSERT INTO `biblioteca`.`emprestimo` (`dataemprestimo`, `livro_id`, `pessoa_id`)
+INSERT INTO `biblioteca`.`tb_emprestimo` (`dataemprestimo`, `livro_id`, `pessoa_id`)
 VALUES ('2024-05-11', 1, 1);
 
 -- -----------------------------------------------------
 -- Table `biblioteca`.`emprestimo_view`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `biblioteca`.`emprestimo_view` ;
+DROP TABLE IF EXISTS `biblioteca`.`view_emprestimo` ;
 
-CREATE VIEW `biblioteca`.`emprestimo_view` 
+CREATE VIEW `biblioteca`.`view_emprestimo` 
 AS select 
-    `biblioteca`.`emprestimo`.`id` AS `id`,
-    `biblioteca`.`emprestimo`.`livro_id` AS `livro_id`,
-    `biblioteca`.`emprestimo`.`pessoa_id` AS `pessoa_id`,
-    `biblioteca`.`emprestimo`.`dataemprestimo` AS `dataemprestimo`,
-    `biblioteca`.`emprestimo`.`datadevolucao` AS `datadevolucao`,
-    `biblioteca`.`pessoa`.`nome` AS `nome`,
-    `biblioteca`.`livro`.`titulo` AS `titulo`,
-    `biblioteca`.`livro`.`autor` AS `autor` 
+    `biblioteca`.`tb_emprestimo`.`id` AS `id`,
+    `biblioteca`.`tb_emprestimo`.`livro_id` AS `livro_id`,
+    `biblioteca`.`tb_emprestimo`.`pessoa_id` AS `pessoa_id`,
+    `biblioteca`.`tb_emprestimo`.`dataemprestimo` AS `dataemprestimo`,
+    `biblioteca`.`tb_emprestimo`.`datadevolucao` AS `datadevolucao`,
+    `biblioteca`.`tb_pessoa`.`nome` AS `nome`,
+    `biblioteca`.`tb_livro`.`titulo` AS `titulo`,
+    `biblioteca`.`tb_livro`.`autor` AS `autor` 
 from 
-    ((`biblioteca`.`emprestimo` join `biblioteca`.`pessoa`) join `biblioteca`.`livro`) 
+    ((`biblioteca`.`tb_emprestimo` join `biblioteca`.`tb_pessoa`) join `biblioteca`.`tb_livro`) 
 where 
-    ((`biblioteca`.`emprestimo`.`pessoa_id` = `biblioteca`.`pessoa`.`id`) 
-and (`biblioteca`.`emprestimo`.`livro_id` = `biblioteca`.`livro`.`id`));
+    ((`biblioteca`.`tb_emprestimo`.`pessoa_id` = `biblioteca`.`tb_pessoa`.`id`) 
+and (`biblioteca`.`tb_emprestimo`.`livro_id` = `biblioteca`.`tb_livro`.`id`));

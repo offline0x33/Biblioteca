@@ -21,7 +21,7 @@ import java.util.Date;
  * @author bajinho
  */
 @Entity
-@Table(name = "emprestimo")
+@Table(name = "tb_emprestimo")
 public class Emprestimo implements Serializable {
 
     private static final long serialVersionUID = 1L;

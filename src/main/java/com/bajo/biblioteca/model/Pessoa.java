@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @author bajinho
  */
 @Entity
-@Table(name = "pessoa", catalog = "biblioteca", schema = "")
+@Table(name = "tb_pessoa")
 @NamedQueries({
     @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
     @NamedQuery(name = "Pessoa.findById", query = "SELECT p FROM Pessoa p WHERE p.id = :id"),    

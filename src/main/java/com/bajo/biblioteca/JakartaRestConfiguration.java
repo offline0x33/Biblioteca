@@ -16,7 +16,7 @@ import org.jboss.logging.Logger;
 @ApplicationPath("resources")
 public class JakartaRestConfiguration extends Application {
 
-    private static Logger log = Logger.getLogger(JakartaRestConfiguration.class);
+    private final Logger log = Logger.getLogger(JakartaRestConfiguration.class);
 
     public JakartaRestConfiguration() {
         log.trace("called method with: %s");

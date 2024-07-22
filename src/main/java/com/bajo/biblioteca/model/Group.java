@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @author bajinho
  */
 @Entity
-@Table(name = "group", catalog = "biblioteca", schema = "")
+@Table(name = "tb_group")
 @NamedQueries({
     @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g"),
     @NamedQuery(name = "Group.findById", query = "SELECT g FROM Group g WHERE g.id = :id"),
