@@ -12,6 +12,11 @@ import java.lang.annotation.Target;
 import jakarta.ws.rs.NameBinding;
 
 /**
+ * Indicates that the annotated element or method should be compressed using GZIP.
+ *
+ * This annotation can be applied to classes, methods, or fields to signal that the
+ * data associated with them should be compressed using the GZIP algorithm.
+ *
  * @author Santiago Pericas-Geertsen
  */
 @NameBinding

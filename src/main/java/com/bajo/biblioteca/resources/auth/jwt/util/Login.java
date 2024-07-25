@@ -5,45 +5,80 @@
 package com.bajo.biblioteca.resources.auth.jwt.util;
 
 import java.io.Serializable;
-import java.util.List;
-import org.springframework.security.core.GrantedAuthority;
+
 
 /**
+ * Represents a user's login credentials for authentication.
  *
  * @author bajinho
+ * @created 2024-07-24
  */
 public class Login implements Serializable {
 
-//    public Login(String username, String password1, List<GrantedAuthority> authorities) {
-//    }
-
     private static final long serialVersionUID = 1L;
 
+    /**
+     * User's email address.
+     */
     private String email;
 
+    /**
+     * User's password.
+     */
     private String password;
-    
+
+    /**
+     * Constructor to initialize the login credentials.
+     *
+     * @param email User's email address.
+     * @param password User's password.
+     */
     public Login(String email, String password) {
         this.email = email;
         this.password = password;
     }
-    
+
+    /**
+     * Gets the user's email address.
+     *
+     * @return User's email address.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets the user's email address.
+     *
+     * @param email User's email address.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets the user's password.
+     *
+     * @return User's password.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the user's password.
+     *
+     * @param password User's password.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Generates a hash code for the `Login` object.
+     *
+     * @return Hash code value.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -51,6 +86,12 @@ public class Login implements Serializable {
         return hash;
     }
 
+    /**
+     * Checks if two `Login` objects are equal.
+     *
+     * @param object Object to compare with.
+     * @return `true` if objects are equal, `false` otherwise.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -64,8 +105,13 @@ public class Login implements Serializable {
         return true;
     }
 
+    /**
+     * Returns a string representation of the `Login` object.
+     *
+     * @return String representation of the object.
+     */
     @Override
     public String toString() {
-        return "com.bajo.biblioteca.resources.auth.util.Login[ id=" + email + " ]";
+        return "com.bajo.biblioteca.resources.auth.util.Login[ email=" + email + " ]";
     }
 }

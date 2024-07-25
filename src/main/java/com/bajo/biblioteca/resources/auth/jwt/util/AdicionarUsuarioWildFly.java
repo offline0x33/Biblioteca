@@ -21,13 +21,64 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * @created
+ * Descrição da Classe AdicionarUsuarioWildFly
  * 
- * @updated 
- * 17-06-2024 - changed for package com.bajo.biblioteca.resources.auth.jwt.util;
+ * **Pacote**: com.bajo.biblioteca.resources.auth.jwt.util
+ * 
+ * **Descrição:**
+ * 
+ * A classe AdicionarUsuarioWildFly fornece uma funcionalidade específica para 
+ * adicionar usuários no WildFly em memória. Ela não implementa a interface 
+ * UserDetailsService usada pelo Spring Security para carregar usuários de um 
+ * banco de dados ou diretório.
+ * 
+ * **Atributos:**
+ * 
+ * em: Injetado EntityManager para interagir com o banco de dados (não utilizado
+ * no método createUserInMemory). host: Endereço IP do host WildFly (inicialmente
+ * nulo, depois definido como "localhost").port: Porta de acesso ao WildFly 
+ * (fixada em 9990).
+ * 
+ * **Método:**
+ * 
+ *  createUserInMemory(User user):
+ * 
+ *         Tenta criar uma conexão com o WildFly através do ModelControllerClient.
+ *       Define o endereço do host como "localhost".
+ *       Constrói um modelo ModelNode para a operação de adição de usuário.
+ *       Define os parâmetros da operação:
+ *           operation: "add-user" (adicionar usuário).
+ *           address: Caminho para o recurso de gerenciamento de usuários.
+ *           user: Nome de usuário a ser adicionado (obtido do objeto User).
+ *           groups: Grupo(s) ao qual o usuário pertence (atualmente definido como "user").
+ *           password: Senha do usuário (obtida do objeto User).
+ *           realm: Nome do reino de segurança ("ApplicationRealm").
+ *       Executa a operação no WildFly e imprime o resultado na saída.
+ *       Em caso de exceção, imprime o erro no console.
+ * 
+ * **Observações:**
+ * 
+ * A classe AdicionarUsuarioWildFly depende da biblioteca 
+ * org.jboss.as.controller.client.ModelControllerClient para interagir com 
+ * o WildFly.
+ * O método createUserInMemory modifica diretamente o WildFly em memória, o que 
+ * pode não ser adequado para ambientes de produção.\
+ * A classe não está configurada para recuperar informações do usuário de um 
+ * banco de dados.
+ * O método loadUserByUsername está comentado e não implementado.
+ * 
+ * **Uso:**
+ * 
+ * Esta classe pode ser utilizada para provisionar usuários temporariamente no 
+ * WildFly durante o desenvolvimento ou testes. No entanto, para cenários de 
+ * produção, é recomendado utilizar mecanismos de gerenciamento de usuários mais
+ * robustos, como integração com um banco de dados ou LDAP. 
  *
  *
  * @author bajinho
+ * @created 2024-07-04
+ * @updated 
+ * 17-06-2024 - changed for package com.bajo.biblioteca.resources.auth.jwt.util;
  */
 //implements UserDetailsService 
 @Local

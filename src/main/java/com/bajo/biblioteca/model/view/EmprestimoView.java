@@ -19,8 +19,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Represents a view of loan information for a library system.
+ *
+ * This class is a JPA entity view that combines data from multiple tables
+ * (likely `Emprestimo` and related tables) to provide a consolidated view of
+ * loan details. It includes information about the loan ID, book ID, borrower
+ * ID, loan date, return date, borrower name, book title, and author.
+ *
+ * This view object is typically used for querying and displaying loan
+ * information in a user-friendly format.
  *
  * @author bajinho
+ *
+ * {@link Entity} indicates this class is a JPA entity view.
+ * {@link Table} = "view_emprestimo") specifies the corresponding database view
+ * name.
+ * {@link NamedQueries} defines named queries for efficient data retrieval using
+ * various criteria.
  */
 @Entity
 @Table(name = "view_emprestimo")
@@ -38,42 +53,66 @@ public class EmprestimoView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Unique identifier for the loan record.
+     */
     @Basic(optional = false)
     @NotNull
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
+    /**
+     * ID of the borrowed book.
+     */
     @Basic(optional = false)
     @NotNull
     @Column(name = "livro_id", nullable = false)
     private int livroId;
 
+    /**
+     * ID of the person who borrowed the book.
+     */
     @Basic(optional = false)
     @NotNull
     @Column(name = "pessoa_id", nullable = false)
     private int pessoaId;
 
+    /**
+     * Date the book was borrowed.
+     */
     @Column(name = "dataemprestimo")
     @Temporal(TemporalType.DATE)
     private Date dataemprestimo;
 
+    /**
+     * Date the book is due for return. (May be null)
+     */
     @Column(name = "datadevolucao")
     @Temporal(TemporalType.DATE)
     private Date datadevolucao;
 
+    /**
+     * Name of the borrower.
+     */
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
+    /**
+     * Title of the borrowed book.
+     */
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
 
+    /**
+     * Author of the borrowed book.
+     */
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -83,6 +122,11 @@ public class EmprestimoView implements Serializable {
     public EmprestimoView() {
     }
 
+    /**
+     * Gets the unique identifier for the loan record.
+     *
+     * @return the loan ID
+     */
     public Long getId() {
         return id;
     }

@@ -5,7 +5,6 @@
 package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.UserDAO;
-import com.bajo.biblioteca.resources.LoginResource;
 //import com.bajo.biblioteca.resources.auth.util.HashPassword;
 import com.bajo.biblioteca.resources.auth.jwt.util.Login;
 import com.bajo.biblioteca.model.User;
@@ -15,7 +14,6 @@ import com.bajo.biblioteca.resources.auth.jwt.TokenValidator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.security.enterprise.AuthenticationException;
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
@@ -79,21 +77,21 @@ public class LoginResourceSteps {
     }
 
     @Then("the system should return an unauthorized error message")
-    public void theSystemShouldReturnAnUnauthorizedErrorMessage() {
+    public void theSystemShouldReturnAnUnauthorizedErrorMessage() throws AuthenticationException {
         // Verify unauthorized response
-//        Response response = loginResource.login(new Login("valid@email.com", "wrongPassword"));
-//        Assertions.assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
-//        Assertions.assertEquals("Invalid login attempt", response.getEntity());
+        Response response = loginResource.login(new Login("valid@email.com", "wrongPassword"));
+        Assertions.assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
+        Assertions.assertEquals("Invalid login attempt", response.getEntity());
     }
 
     @Then("the system should return an internal server error message")
-    public void theSystemShouldReturnAnInternalServerErrorMassage() {
+    public void theSystemShouldReturnAnInternalServerErrorMassage() throws AuthenticationException {
         // Mock token generation error and verify response
-//        tokenGenerator = Mockito.mock(TokenGenerator.class);
-//        when(tokenGenerator.generateToken(any(User.class))).thenThrow(new RuntimeException());
+        tokenGenerator = Mockito.mock(TokenGenerator.class);
+        when(tokenGenerator.generateToken(any(User.class))).thenThrow(new RuntimeException());
 
-//        Response response = loginResource.login(new Login("valid@email.com", "secret"));
-//        Assertions.assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
-//        Assertions.assertEquals("An error occurred", response.getEntity());
+        Response response = loginResource.login(new Login("valid@email.com", "secret"));
+        Assertions.assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+        Assertions.assertEquals("An error occurred", response.getEntity());
     }
 }

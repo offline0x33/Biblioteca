@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-    <!-- Define Persistence Unit -->
-    <persistence-unit name="bibliotecaPU" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:jboss/MySqlDS</jta-data-source>
-        <!--<class>br.com.test.User</class>-->
-        <class>com.bajo.biblioteca.model.Livro</class>
-        <class>com.bajo.biblioteca.model.Emprestimo</class>
-        <class>com.bajo.biblioteca.model.Pessoa</class>
-        <class>com.bajo.biblioteca.model.User</class>
-        <class>com.bajo.biblioteca.model.Group</class>
-        <class>com.bajo.biblioteca.model.view.EmprestimoView</class>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="bibliotecaPU" transaction-type="JTA">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <jta-data-source>java:jboss/MySqlDS</jta-data-source>
+    <!--<class>br.com.test.User</class>-->
+    <class>com.bajo.biblioteca.model.Livro</class>
+    <class>com.bajo.biblioteca.model.Emprestimo</class>
+    <class>com.bajo.biblioteca.model.Pessoa</class>
+    <class>com.bajo.biblioteca.model.User</class>
+    <class>com.bajo.biblioteca.model.Group</class>
+    <class>com.bajo.biblioteca.model.view.EmprestimoView</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db:3306/sample"/>
                 <property name="javax.persistence.jdbc.user" value="mysql"/>
                 <property name="javax.persistence.jdbc.password" value="mysql"/>
                 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             -->
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="false"/>
-            <property name="hibernate.hbm2ddl.auto" value="none"/>
-            <property name="hibernate.generate_statistics" value="true"/>
-            <property name="wildfly.jpa.default-unit" value="true"/>
-        </properties>
-    </persistence-unit>
-    <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.bajo.biblioteca.model.Livro</class>
-        <class>com.bajo.biblioteca.model.Emprestimo</class>
-        <class>com.bajo.biblioteca.model.Pessoa</class>
-        <class>com.bajo.biblioteca.model.User</class>
-        <class>com.bajo.biblioteca.model.Group</class>
-        <class>com.bajo.biblioteca.model.view.EmprestimoView</class>
-        <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb"/>
-            <property name="jakarta.persistence.jdbc.user" value="sa"/>
-            <property name="jakarta.persistence.jdbc.password" value="sa"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="false"/>
-            <property name="hibernate.generate_statistics" value="true"/>
-        </properties>
-    </persistence-unit>
+      <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="hibernate.hbm2ddl.auto" value="none"/>
+      <property name="hibernate.generate_statistics" value="true"/>
+      <property name="wildfly.jpa.default-unit" value="true"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.bajo.biblioteca.model.Livro</class>
+    <class>com.bajo.biblioteca.model.Emprestimo</class>
+    <class>com.bajo.biblioteca.model.Pessoa</class>
+    <class>com.bajo.biblioteca.model.User</class>
+    <class>com.bajo.biblioteca.model.Group</class>
+    <class>com.bajo.biblioteca.model.view.EmprestimoView</class>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb"/>
+      <property name="jakarta.persistence.jdbc.user" value="sa"/>
+      <property name="jakarta.persistence.jdbc.password" value="sa"/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="hibernate.generate_statistics" value="true"/>
+    </properties>
+  </persistence-unit>
 </persistence>

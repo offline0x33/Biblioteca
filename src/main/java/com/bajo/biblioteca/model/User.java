@@ -59,7 +59,7 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "email")
     private String email;
-    
+
     public User(String username, String password, String email, String authorities) {
         this.username = username;
         this.password = password;
@@ -67,13 +67,13 @@ public class User implements Serializable {
         this.authorities = authorities;
     }
 
-//    public User(Long id, String username, String password, String email, String authorities) {
-//        this.id = id;
-//        this.username = username;
-//        this.password = password;
-//        this.email = email;
-//        this.authorities = authorities;
-//    }
+    public User(Long id, String username, String password, String email, String authorities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+    }
 
     public String getAuthorities() {
         return authorities;
@@ -123,20 +123,23 @@ public class User implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
+        User other = (User) obj;
+        if (id != null && other.id != null) {
+            return id.equals(other.id);
+        } else {
+            return username.equals(other.username) && email.equals(other.email);
         }
-        return true;
     }
 
     @Override
     public String toString() {
-        return "com.bajo.biblioteca.model.User[ id=" + id + " ]";
+        return "com.bajo.biblioteca.model.User[ id=" + id + username + email + " ]";
     }
 }

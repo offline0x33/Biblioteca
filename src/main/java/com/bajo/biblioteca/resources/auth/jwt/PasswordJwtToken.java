@@ -8,8 +8,13 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.Password;
 
 /**
- *
+ * Encapsulates the password used for decrypting JWT tokens.
+ * 
+ * This class holds the password used to decrypt JWT tokens and provides access
+ * to the password as a `Password` object.
+ * 
  * @author bajinho
+ * @created 2024-07-24
  */
 public class PasswordJwtToken {
 
@@ -21,10 +26,20 @@ public class PasswordJwtToken {
         this.password = Keys.password(keyToken.toCharArray());
     }
 
+    /**
+     * Returns the password as a `Password` object.
+     *
+     * @return The password as a `Password` object.
+     */
     public Password getPassword() {
         return this.password;
     }
 
+    /**
+     * Returns the raw key token as a string.
+     *
+     * @return The raw key token as a string.
+     */
     public String getKeyToken() {
         return this.keyToken;
     }

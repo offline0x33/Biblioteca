@@ -51,6 +51,10 @@ public class Pessoa implements Serializable {
         this.id = id;
     }
 
+    public Pessoa(String nome) {
+        this.nome = nome;
+    }
+    
     public Pessoa(Long id, String nome) {
         this.id = id;
         this.nome = nome;

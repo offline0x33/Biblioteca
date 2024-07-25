@@ -18,7 +18,7 @@ import jakarta.ws.rs.ext.Provider;
 
 /**
  * Dynamic feature for a enabling a logging request/response post-matching filter that dynamically decides to bind the
- * logging filter only to GET processing resource methods on all subclasses of {@link MyResourceClass} and the
+ * logging filter only to GET processing resource methods on all subclasses of {@link com.bajo.biblioteca.resources.PessoasResource} and the
  * {@code MyResourceClass} itself.
  *
  * @author Santiago Pericas-Geertsen

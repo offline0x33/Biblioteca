@@ -1,9 +1,10 @@
-   /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.bajo.biblioteca.resources;
 
+import com.bajo.biblioteca.bean.UserBean;
 import com.bajo.biblioteca.dao.UserDAO;
 import com.bajo.biblioteca.model.User;
 import com.bajo.biblioteca.resources.auth.jwt.TokenGenerator;
@@ -12,6 +13,8 @@ import com.bajo.biblioteca.resources.auth.jwt.util.Login;
 import io.jsonwebtoken.security.InvalidKeyException;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 import jakarta.security.enterprise.AuthenticationException;
 import jakarta.ws.rs.Consumes;
@@ -31,12 +34,14 @@ import jakarta.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/auth")
 public class LoginResource {
+//
 
     @PersistenceContext
     private EntityManager em;
 
     /**
      * 26-06-2024
+     *
      * @param usuario
      * @return
      * @throws AuthenticationException

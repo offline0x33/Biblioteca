@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** 
- * created 05-06-2024
- * 
- * @author bajinho
+/**
  *
  * <p>
  * Simplificando, os filtros permitem modificar as propriedades das solicitações
@@ -31,17 +28,17 @@ import java.util.logging.Logger;
  * tanto no lado do servidor quanto no lado do cliente. Tenha em mente que os
  * filtros são sempre executados, independentemente de o recurso ter sido
  * encontrado ou não.</p>
- * </br>
- */
-/**
+ * 
  * <p>
  * Implementando o ContainerRequestFilter interface e registrá-lo como um
  * Provedor em nossa api Rest. Caso queiramos executar um filtro antes da
  * correspondência de recursos, podemos usar um filtro de pré-correspondência
  * anotando nosso filtro com o</p>
- * </br>
  *
- * @PreMatching como anotação:
+ * {@link jakarta.ws.rs.container.PreMatching} como anotação:
+ *
+ * @author bajinho
+ * @created 2024-06-05
  */
 @Provider
 @PreMatching
@@ -70,17 +67,15 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
             UriInfo uriInfo = requestContext.getUriInfo();
 
             /**
-             *  04-07-2024
-             *  Extract the path 
-             *  
-             *  exemplo:
-             *  path /pessoas/bajinho
-             *  
-             *  Agora, o array path conterá os seguintes valores:
+             * 04-07-2024 Extract the path
+             *
+             * exemplo: path /pessoas/bajinho
+             *
+             * Agora, o array path conterá os seguintes valores:
              * <ol>
-             *    <li>1. "" (uma string vazia, pois a rota começa com “/”) 
-             *    <li>2. "pessoas"
-             *    <li>3. "bajinho"
+             * <li>1. "" (uma string vazia, pois a rota começa com “/”)
+             * <li>2. "pessoas"
+             * <li>3. "bajinho"
              * </ol>
              */
             String[] path = uriInfo.getPath().split("/");

@@ -7,7 +7,10 @@ package com.bajo.biblioteca.resources.auth.jwt.util;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
+ * This code utilizes jBCrypt, which you need installed to use. jBCrypt:
+ * http://www.mindrot.org/projects/jBCrypt/
  *
+ * @author Ian Gallagher igallagher@securityinnovation.com
  * @author bajinho
  */
 public class HashPassword {

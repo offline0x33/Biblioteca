@@ -16,8 +16,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @updater bajinhyo: 10-06-2024
+ * Indicates that the annotated element or method should be logged.
+ *
+ * This annotation can be applied to classes, methods, or fields to signal that
+ * the execution of the annotated element should be logged for tracking and debugging purposes.
+ *
  * @author Santiago Pericas-Geertsen
+ * @updated 10-06-2024 by bajinhyo
  */
 @NameBinding
 @Target({ ElementType.TYPE, ElementType.METHOD })
