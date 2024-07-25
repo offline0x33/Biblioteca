@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
- * @created 2024-07-24
  * @author bajinho
+ * @created 2024-07-24
  */
 @ExtendWith(MockitoExtension.class)
 public class PessoasResourceTest {
@@ -38,8 +38,8 @@ public class PessoasResourceTest {
     /**
      * Test of {@link PessoasResource#testGetAll()}.
      *
-     * This test verifies that the `testGetAll` method of the `UsersResource` class
-     * creates a new user and returns the expected response.
+     * This test verifies that the `testGetAll` method of the `UsersResource`
+     * class creates a new user and returns the expected response.
      *
      */
     @Test
@@ -57,8 +57,8 @@ public class PessoasResourceTest {
     /**
      * Test of {@link PessoasResource#testGetPessoa()}.
      *
-     * This test verifies that the `testGetPessoa` method of the `UsersResource` class
-     * creates a new user and returns the expected response.
+     * This test verifies that the `testGetPessoa` method of the `UsersResource`
+     * class creates a new user and returns the expected response.
      *
      */
     @Test
@@ -76,8 +76,8 @@ public class PessoasResourceTest {
     /**
      * Test of {@link PessoasResource#testCreate(Pessoa)}.
      *
-     * This test verifies that the `testCreate` method of the `UsersResource` class
-     * creates a new user and returns the expected response.
+     * This test verifies that the `testCreate` method of the `UsersResource`
+     * class creates a new user and returns the expected response.
      *
      * @throws Exception if an unexpected error occurs during the test.
      */

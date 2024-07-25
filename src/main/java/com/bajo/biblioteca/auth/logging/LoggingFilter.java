@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-package com.bajo.biblioteca.resources.auth.logging;
+package com.bajo.biblioteca.auth.logging;
 
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.Priorities;

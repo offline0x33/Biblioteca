@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package com.bajo.biblioteca.resources.auth.util;
+package com.bajo.biblioteca.auth.util;
 
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.AfterEach;

@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.biblioteca.resources.auth;
+package com.bajo.biblioteca.auth;
 
-import com.bajo.biblioteca.resources.auth.jwt.TokenValidator;
+import com.bajo.biblioteca.auth.jwt.TokenValidator;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.NotAuthorizedException;
 import jakarta.ws.rs.container.ContainerRequestContext;

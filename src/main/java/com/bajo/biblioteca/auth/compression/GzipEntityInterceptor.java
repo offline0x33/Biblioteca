@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-package com.bajo.biblioteca.resources.auth.compression;
+package com.bajo.biblioteca.auth.compression;
 
 import java.io.IOException;
 import java.io.InputStream;

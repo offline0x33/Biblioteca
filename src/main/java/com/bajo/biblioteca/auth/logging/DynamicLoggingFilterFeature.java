@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-package com.bajo.biblioteca.resources.auth.logging;
+package com.bajo.biblioteca.auth.logging;
 
 import com.bajo.biblioteca.resources.PessoasResource;
 import jakarta.ws.rs.GET;

@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-package com.bajo.biblioteca.resources.auth.caching;
+package com.bajo.biblioteca.auth.caching;
 
 import java.io.IOException;
 

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.biblioteca.resources.auth.compression;
+package com.bajo.biblioteca.auth.compression;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

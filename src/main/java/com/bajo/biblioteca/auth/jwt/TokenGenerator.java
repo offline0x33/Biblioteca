@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.bajo.biblioteca.resources.auth.jwt;
+package com.bajo.biblioteca.auth.jwt;
 
 import com.bajo.biblioteca.model.User;
 import io.jsonwebtoken.Jwts;

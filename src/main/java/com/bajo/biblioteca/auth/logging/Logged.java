@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-package com.bajo.biblioteca.resources.auth.logging;
+package com.bajo.biblioteca.auth.logging;
 
 import jakarta.ws.rs.NameBinding;
 import java.lang.annotation.ElementType;

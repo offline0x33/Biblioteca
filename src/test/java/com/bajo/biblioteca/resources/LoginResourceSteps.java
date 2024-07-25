@@ -6,10 +6,10 @@ package com.bajo.biblioteca.resources;
 
 import com.bajo.biblioteca.dao.UserDAO;
 //import com.bajo.biblioteca.resources.auth.util.HashPassword;
-import com.bajo.biblioteca.resources.auth.jwt.util.Login;
+import com.bajo.biblioteca.auth.jwt.util.Login;
 import com.bajo.biblioteca.model.User;
-import com.bajo.biblioteca.resources.auth.jwt.TokenGenerator;
-import com.bajo.biblioteca.resources.auth.jwt.TokenValidator;
+import com.bajo.biblioteca.auth.jwt.TokenGenerator;
+import com.bajo.biblioteca.auth.jwt.TokenValidator;
 //import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
