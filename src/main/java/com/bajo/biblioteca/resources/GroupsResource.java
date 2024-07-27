@@ -63,7 +63,7 @@ public class GroupsResource {
      */
     @GET
     @Path("{name}")
-    public Response getPessoa(@PathParam("name") String name) {
+    public Response getGroup(@PathParam("name") String name) {
         GroupDAO dao = new GroupDAO(em);
         return Response.ok(dao.consultarPorNome(name)).build();
     }
