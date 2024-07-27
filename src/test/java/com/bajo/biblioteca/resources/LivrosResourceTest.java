@@ -4,7 +4,7 @@
  */
 package com.bajo.biblioteca.resources;
 
-import com.bajo.biblioteca.model.Pessoa;
+import com.bajo.biblioteca.model.Livro;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +17,18 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
+ *
  * @author bajinho
- * @created 2024-07-24
+ * @created 2024-07-26
  */
 @ExtendWith(MockitoExtension.class)
-public class PessoasResourceTest {
+public class LivrosResourceTest {
 
     /**
      * Injected mock instance of PessoasResource for testing.
      */
     @Mock
-    private PessoasResource instance;
+    private LivrosResource instance;
 
     /**
      * Injected mock instance of PessoasResource for testing.
@@ -36,67 +37,69 @@ public class PessoasResourceTest {
     private Response expectedResponse;
 
     /**
-     * Test of {@link PessoasResource#testGetAll()}.
+     * Test of {@link LivrosResource#testGetAll()}.
      *
-     * This test verifies that the `testGetAll` method of the `PessoasResource`
+     * This test verifies that the `testGetAll` method of the `LivrosResource`
      * class creates a new user and returns the expected response.
      *
      */
     @Test
     public void testGetAll() {
-        List<Pessoa> expectedPessoas = new ArrayList<>();
-        when(expectedResponse.getEntity()).thenReturn(expectedPessoas);
+        List<Livro> expectedLivros = new ArrayList<>();
+        Livro livro = Mockito.mock(Livro.class);
+        expectedLivros.add(livro);
+        when(expectedResponse.getEntity()).thenReturn(expectedLivros);
         when(instance.getAll()).thenReturn(expectedResponse);
 
         Response result = instance.getAll();
 
-        assertEquals(expectedPessoas, result.getEntity());
+        assertEquals(expectedLivros, result.getEntity());
         Mockito.verify(instance, Mockito.times(1)).getAll(); // Verificar se getAll foi chamado
     }
 
     /**
-     * Test of {@link PessoasResource#testGetPessoa()}.
+     * Test of {@link LivrosResource#testGetLivro()}.
      *
-     * This test verifies that the `testGetPessoa` method of the `PessoasResource`
+     * This test verifies that the `testGetLivro` method of the `LivrosResource`
      * class creates a new user and returns the expected response.
      *
      */
     @Test
-    public void testGetPessoa() {
-        Pessoa expectedPessoa = Mockito.mock(Pessoa.class);
-        when(expectedResponse.getEntity()).thenReturn(expectedPessoa);
-        when(instance.getPessoa("name")).thenReturn(expectedResponse);
+    public void testGetLivro() {
+        Livro livro = Mockito.mock(Livro.class);
+        when(expectedResponse.getEntity()).thenReturn(livro);
+        when(instance.getAll()).thenReturn(expectedResponse);
 
-        Response result = instance.getPessoa("name");
+        Response result = instance.getAll();
 
-        assertEquals(expectedPessoa, result.getEntity());
-        Mockito.verify(instance, Mockito.times(1)).getPessoa("name");
+        assertEquals(livro, result.getEntity());
+        Mockito.verify(instance, Mockito.times(1)).getAll(); // Verificar se getAll foi chamado
     }
 
     /**
-     * Test of {@link PessoasResource#testCreate(Pessoa)}.
+     * Test of {@link LivrosResource#testCreate()}.
      *
-     * This test verifies that the `testCreate` method of the `PessoasResource`
+     * This test verifies that the `testCreate` method of the `LivrosResource`
      * class creates a new user and returns the expected response.
      *
      * @throws Exception if an unexpected error occurs during the test.
      */
     @Test
     public void testCreate() throws Exception {
-        Pessoa expectedPessoa = Mockito.mock(Pessoa.class);
-        when(expectedResponse.getEntity()).thenReturn(expectedPessoa);
-        when(instance.create(expectedPessoa)).thenReturn(expectedResponse);
+        Livro livro = Mockito.mock(Livro.class);
+        when(expectedResponse.getEntity()).thenReturn(livro);
+        when(instance.create(livro)).thenReturn(expectedResponse);
 
-        Response result = instance.create(expectedPessoa);
+        Response result = instance.create(livro);
 
-        assertEquals(expectedPessoa, result.getEntity());
-        Mockito.verify(instance, Mockito.times(1)).create(expectedPessoa);
+        assertEquals(livro, result.getEntity());
+        Mockito.verify(instance, Mockito.times(1)).create(livro); // Verificar se getAll foi chamado
     }
 
     /**
-     * Test of {@link PessoasResource#testExcluir(id)}.
+     * Test of {@link LivrosResource#testExcluir(id)}.
      *
-     * This test verifies that the `testExcluir` method of the `PessoasResource`
+     * This test verifies that the `testExcluir` method of the `LivrosResource`
      * class creates a new user and returns the expected response.
      *
      * @throws Exception if an unexpected error occurs during the test.
@@ -114,23 +117,23 @@ public class PessoasResourceTest {
     }
 
     /**
-     * Test of {@link PessoasResource#editar(Pessoa)}.
+     * Test of {@link LivrosResource#testEditar()}.
      *
-     * This test verifies that the `editar` method of the `PessoasResource` class
-     * creates a new user and returns the expected response.
+     * This test verifies that the `testEditar` method of the `LivrosResource`
+     * class creates a new user and returns the expected response.
      *
      * @throws Exception if an unexpected error occurs during the test.
      */
     @Test
     public void testEditar() throws Exception {
-        Pessoa expectedPessoa = Mockito.mock(Pessoa.class);
-        when(expectedResponse.getEntity()).thenReturn(expectedPessoa);
-        when(instance.editar(expectedPessoa)).thenReturn(expectedResponse);
+        Livro expectedLivro = Mockito.mock(Livro.class);
+        when(expectedResponse.getEntity()).thenReturn(expectedLivro);
+        when(instance.editar(expectedLivro)).thenReturn(expectedResponse);
 
-        Response result = instance.editar(expectedPessoa);
+        Response result = instance.editar(expectedLivro);
 
-        assertEquals(expectedPessoa, result.getEntity());
-        Mockito.verify(instance, Mockito.times(1)).editar(expectedPessoa);
+        assertEquals(expectedLivro, result.getEntity());
+        Mockito.verify(instance, Mockito.times(1)).editar(expectedLivro);
     }
 
 }
