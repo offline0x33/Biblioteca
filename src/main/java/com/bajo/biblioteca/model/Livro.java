@@ -75,6 +75,12 @@ public class Livro implements Serializable {
     @Basic(optional = false)
     @Column(name = "emprestado", nullable = false)
     private int emprestado;
+    
+    public Livro(String titulo, String autor, int emprestado) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.emprestado = emprestado;
+    }
 
     // ... getter and setter methods for id, titulo, autor, and emprestado ...
 

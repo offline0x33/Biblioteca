@@ -115,7 +115,7 @@ public class LivroDAOTest {
     /**
      * Test of {@link LivroDAOTest#testConsultarPorTitulo()}.
      *
-     * This test verifies that the `testConsultarPorNome` method of the
+     * This test verifies that the `testConsultarPorTitulo` method of the
      * `LivroDAOTest` class creates a new user and returns the expected
      * response.
      *

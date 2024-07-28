@@ -6,110 +6,161 @@ package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Emprestimo;
 import com.bajo.biblioteca.model.view.EmprestimoView;
+import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  *
  * @author bajinho
+ * @created 2024-07-28
  */
+@ExtendWith(MockitoExtension.class)
 public class EmprestimoDAOTest {
-    
-    public EmprestimoDAOTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
     /**
-     * Test of salvar method, of class EmprestimoDAO.
+     * Injected mock instance of PessoasResource for testing.
+     */
+    @Mock
+    private EmprestimoDAO instance;
+
+    /**
+     * Injected mock instance of PessoasResource for testing.
+     */
+    @Mock
+    private EntityManager expectedResponse;
+
+    /**
+     * Test of {@link EmprestimoDAOTest#testSalvar()}.
+     *
+     * This test verifies that the `testSalvar` method of the
+     * `EmprestimoDAOTest` class creates a new user and returns the expected
+     * response.
+     *
+     * @throws Exception if an unexpected error occurs during the test.
+     *
      */
     @Test
     public void testSalvar() throws Exception {
-//        System.out.println("salvar");
-//        Emprestimo emprestimo = null;
-//        EmprestimoDAO instance = null;
-//        Emprestimo expResult = null;
-//        Emprestimo result = instance.salvar(emprestimo);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        Emprestimo emprestimo = Mockito.mock(Emprestimo.class);
+
+        when(expectedResponse.merge(emprestimo)).thenReturn(emprestimo);
+        when(instance.salvar(emprestimo)).thenReturn(emprestimo);
+
+        Emprestimo result = instance.salvar(emprestimo);
+
+        assertEquals(expectedResponse.merge(emprestimo), result);
+
+        Mockito.verify(instance, Mockito.times(1)).salvar(emprestimo);
     }
 
     /**
-     * Test of excluir method, of class EmprestimoDAO.
+     * Test of {@link EmprestimoDAOTest#testExcluir()}.
+     *
+     * This test verifies that the `testExcluir` method of the
+     * `EmprestimoDAOTest` class creates a new user and returns the expected
+     * response.
+     *
      */
     @Test
     public void testExcluir() {
-//        System.out.println("excluir");
-//        Long id = null;
-//        EmprestimoDAO instance = null;
-//        instance.excluir(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        /**
+         * Criando o objeto manualmente nesse caso tive que criar o objecto dao
+         * pois a função não retorna tipos, e neste caso não consegui usar o
+         * Mockito.when().
+         */
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO(expectedResponse);
+
+        Long id = 1L;
+        Emprestimo emprestimo = new Emprestimo(new Date(), new Date(), 1L, 1L);
+        emprestimo.setId(id);
+
+        when(expectedResponse.find(Emprestimo.class, id)).thenReturn(emprestimo);
+
+        emprestimoDAO.excluir(id);
+
+        verify(expectedResponse, Mockito.times(1)).find(Emprestimo.class, id);
+        verify(expectedResponse, Mockito.times(1)).remove(emprestimo);
     }
 
     /**
-     * Test of consultarPorId method, of class EmprestimoDAO.
+     * Test of {@link EmprestimoDAOTest#testConsultarPorId()}.
+     *
+     * This test verifies that the `testConsultarPorId` method of the
+     * `EmprestimoDAOTest` class creates a new user and returns the expected
+     * response.
+     *
      */
     @Test
     public void testConsultarPorId() {
-//        System.out.println("consultarPorId");
-//        Long id = null;
-//        EmprestimoDAO instance = null;
-//        Emprestimo expResult = null;
-//        Emprestimo result = instance.consultarPorId(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        Emprestimo emprestimo = Mockito.mock(Emprestimo.class);
+        Long id = 1L;
+
+        when(instance.consultarPorId(id)).thenReturn(emprestimo);
+        when(expectedResponse.find(Emprestimo.class, id)).thenReturn(emprestimo);
+
+        Emprestimo result = instance.consultarPorId(id);
+
+        assertEquals(expectedResponse.find(Emprestimo.class, id), result);
+
+        verify(instance, Mockito.times(1)).consultarPorId(id);
+        verify(expectedResponse).find(Emprestimo.class, id);
     }
 
     /**
-     * Test of consultarPorNome method, of class EmprestimoDAO.
+     * Test of {@link EmprestimoDAOTest#testConsultarPorNome()}.
+     *
+     * This test verifies that the `testConsultarPorNome` method of the
+     * `EmprestimoDAOTest` class creates a new user and returns the expected
+     * response.
+     *
      */
     @Test
     public void testConsultarPorNome() {
-//        System.out.println("consultarPorNome");
-//        String nome = "";
-//        EmprestimoDAO instance = null;
-//        List<EmprestimoView> expResult = null;
-//        List<EmprestimoView> result = instance.consultarPorNome(nome);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        String nome = "nome";
+        List<EmprestimoView> expectedEmprestimos = new ArrayList<>();
+        EmprestimoView emprestimo = Mockito.mock(EmprestimoView.class);
+        expectedEmprestimos.add(emprestimo);
+
+        when(instance.consultarPorNome(nome)).thenReturn(expectedEmprestimos);
+
+        List<EmprestimoView> result = instance.consultarPorNome(nome);
+
+        assertEquals(expectedEmprestimos, result);
+
+        verify(instance, Mockito.times(1)).consultarPorNome(nome);
     }
 
     /**
-     * Test of consultarPorTitulo method, of class EmprestimoDAO.
+     * Test of {@link EmprestimoDAOTest#testConsultarPorTitulo()}.
+     *
+     * This test verifies that the `testConsultarPorTitulo` method of the
+     * `EmprestimoDAOTest` class creates a new user and returns the expected
+     * response.
+     *
      */
     @Test
     public void testConsultarPorTitulo() {
-//        System.out.println("consultarPorTitulo");
-//        String titulo = "";
-//        EmprestimoDAO instance = null;
-//        List<EmprestimoView> expResult = null;
-//        List<EmprestimoView> result = instance.consultarPorTitulo(titulo);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        String titulo = "titulo";
+        List<EmprestimoView> expectedEmprestimos = new ArrayList<>();
+        EmprestimoView emprestimo = Mockito.mock(EmprestimoView.class);
+        expectedEmprestimos.add(emprestimo);
+
+        when(instance.consultarPorTitulo(titulo)).thenReturn(expectedEmprestimos);
+
+        List<EmprestimoView> result = instance.consultarPorTitulo(titulo);
+
+        assertEquals(expectedEmprestimos, result);
+
+        verify(instance, Mockito.times(1)).consultarPorTitulo(titulo);
     }
-    
 }
