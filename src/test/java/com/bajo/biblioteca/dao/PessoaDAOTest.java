@@ -5,95 +5,134 @@
 package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Pessoa;
+import com.bajo.biblioteca.dao.PessoaDAO;
+import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  *
  * @author bajinho
+ * @created 2024-07-28
  */
+@ExtendWith(MockitoExtension.class)
 public class PessoaDAOTest {
     
-    public PessoaDAOTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
+      /**
+     * Injected mock instance of PessoasResource for testing.
+     */
+    @Mock
+    private PessoaDAO instance;
 
     /**
-     * Test of salvar method, of class PessoaDAO.
+     * Injected mock instance of PessoasResource for testing.
+     */
+    @Mock
+    private EntityManager expectedResponse;
+
+ /**
+     * Test of {@link PessoaDAOTest#testSalvar()}.
+     *
+     * This test verifies that the `testSalvar` method of the `PessoaDAOTest`
+     * class creates a new user and returns the expected response.
+     *
+     * @throws Exception if an unexpected error occurs during the test.
+     *
      */
     @Test
     public void testSalvar() throws Exception {
-//        System.out.println("salvar");
-//        Pessoa pessoa = null;
-//        PessoaDAO instance = null;
-//        Pessoa expResult = null;
-//        Pessoa result = instance.salvar(pessoa);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        Pessoa people = Mockito.mock(Pessoa.class);
+
+        when(expectedResponse.merge(people)).thenReturn(people);
+        when(instance.salvar(people)).thenReturn(people);
+
+        Pessoa result = instance.salvar(people);
+
+        assertEquals(expectedResponse.merge(people), result);
+
+        Mockito.verify(instance, Mockito.times(1)).salvar(people);
     }
 
     /**
-     * Test of excluir method, of class PessoaDAO.
+     * Test of {@link PessoaDAOTest#testExcluir()}.
+     *
+     * This test verifies that the `testExcluir` method of the `PessoaDAOTest`
+     * class creates a new user and returns the expected response.
+     *
      */
     @Test
     public void testExcluir() {
-//        System.out.println("excluir");
-//        Long id = null;
-//        PessoaDAO instance = null;
-//        instance.excluir(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        /**
+         * Criando o objeto manualmente nesse caso tive que criar o objecto dao
+         * pois a função não retorna tipos, e neste caso não consegui usar o
+         * Mockito.when().
+         */
+        PessoaDAO pessoaDAO = new PessoaDAO(expectedResponse);
+
+        Long peopleId = 1L;
+        Pessoa people = new Pessoa("username");
+        people.setId(peopleId);
+
+        when(expectedResponse.find(Pessoa.class, peopleId)).thenReturn(people);
+
+        pessoaDAO.excluir(peopleId);
+
+        verify(expectedResponse, Mockito.times(1)).find(Pessoa.class, peopleId);
+        verify(expectedResponse, Mockito.times(1)).remove(people);
     }
 
     /**
-     * Test of consultarPorId method, of class PessoaDAO.
+     * Test of {@link PessoaDAOTest#testConsultarPorId()}.
+     *
+     * This test verifies that the `testConsultarPorId` method of the
+     * `PessoaDAOTest` class creates a new user and returns the expected response.
+     *
      */
     @Test
     public void testConsultarPorId() {
-//        System.out.println("consultarPorId");
-//        Long id = null;
-//        PessoaDAO instance = null;
-//        Pessoa expResult = null;
-//        Pessoa result = instance.consultarPorId(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        Pessoa people = Mockito.mock(Pessoa.class);
+        Long id = 1L;
+
+        when(instance.consultarPorId(id)).thenReturn(people);
+        when(expectedResponse.find(Pessoa.class, id)).thenReturn(people);
+
+        Pessoa result = instance.consultarPorId(id);
+
+        assertEquals(expectedResponse.find(Pessoa.class, id), result);
+
+        verify(instance, Mockito.times(1)).consultarPorId(id);
+        verify(expectedResponse).find(Pessoa.class, id);
     }
 
-    /**
-     * Test of consultarPorNome method, of class PessoaDAO.
+   /**
+     * Test of {@link PessoaDAOTest#testConsultarPorNome()}.
+     *
+     * This test verifies that the `testConsultarPorNome` method of the
+     * `PessoaDAOTest` class creates a new user and returns the expected response.
+     *
      */
     @Test
     public void testConsultarPorNome() {
-//        System.out.println("consultarPorNome");
-//        String name = "";
-//        PessoaDAO instance = null;
-//        List<Pessoa> expResult = null;
-//        List<Pessoa> result = instance.consultarPorNome(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        String name = "name";
+        List<Pessoa> expectedUsers = new ArrayList<>();
+        Pessoa people = Mockito.mock(Pessoa.class);
+        expectedUsers.add(people);
+
+        when(instance.consultarPorNome(name)).thenReturn(expectedUsers);
+
+        List<Pessoa> result = instance.consultarPorNome(name);
+
+        assertEquals(expectedUsers, result);
+
+        verify(instance, Mockito.times(1)).consultarPorNome(name);
     }
     
 }
