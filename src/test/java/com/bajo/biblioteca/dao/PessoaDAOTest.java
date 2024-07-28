@@ -25,8 +25,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
  */
 @ExtendWith(MockitoExtension.class)
 public class PessoaDAOTest {
-    
-      /**
+
+    /**
      * Injected mock instance of PessoasResource for testing.
      */
     @Mock
@@ -38,7 +38,7 @@ public class PessoaDAOTest {
     @Mock
     private EntityManager expectedResponse;
 
- /**
+    /**
      * Test of {@link PessoaDAOTest#testSalvar()}.
      *
      * This test verifies that the `testSalvar` method of the `PessoaDAOTest`
@@ -93,7 +93,8 @@ public class PessoaDAOTest {
      * Test of {@link PessoaDAOTest#testConsultarPorId()}.
      *
      * This test verifies that the `testConsultarPorId` method of the
-     * `PessoaDAOTest` class creates a new user and returns the expected response.
+     * `PessoaDAOTest` class creates a new user and returns the expected
+     * response.
      *
      */
     @Test
@@ -112,11 +113,12 @@ public class PessoaDAOTest {
         verify(expectedResponse).find(Pessoa.class, id);
     }
 
-   /**
+    /**
      * Test of {@link PessoaDAOTest#testConsultarPorNome()}.
      *
      * This test verifies that the `testConsultarPorNome` method of the
-     * `PessoaDAOTest` class creates a new user and returns the expected response.
+     * `PessoaDAOTest` class creates a new user and returns the expected
+     * response.
      *
      */
     @Test
@@ -134,5 +136,5 @@ public class PessoaDAOTest {
 
         verify(instance, Mockito.times(1)).consultarPorNome(name);
     }
-    
+
 }
