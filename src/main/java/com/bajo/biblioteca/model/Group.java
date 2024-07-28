@@ -71,6 +71,10 @@ public class Group implements Serializable {
     @Column(name = "username", unique = true)
     private String username;
 
+    public Group(String name){
+        this.name = name;
+    }   
+    
     // ... getter and setter methods for id, name, and username ...
     public Long getId() {
         return id;
