@@ -5,95 +5,135 @@
 package com.bajo.biblioteca.dao;
 
 import com.bajo.biblioteca.model.Livro;
+import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  *
  * @author bajinho
+ * @created 2024-07-28
  */
+@ExtendWith(MockitoExtension.class)
 public class LivroDAOTest {
-    
-    public LivroDAOTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
     /**
-     * Test of salvar method, of class LivroDAO.
+     * Injected mock instance of PessoasResource for testing.
+     */
+    @Mock
+    private LivroDAO instance;
+
+    /**
+     * Injected mock instance of PessoasResource for testing.
+     */
+    @Mock
+    private EntityManager expectedResponse;
+
+    /**
+     * Test of {@link LivroDAOTest#testSalvar()}.
+     *
+     * This test verifies that the `testSalvar` method of the `LivroDAOTest`
+     * class creates a new user and returns the expected response.
+     *
+     * @throws Exception if an unexpected error occurs during the test.
+     *
      */
     @Test
     public void testSalvar() throws Exception {
-//        System.out.println("salvar");
-//        Livro livro = null;
-//        LivroDAO instance = null;
-//        Livro expResult = null;
-//        Livro result = instance.salvar(livro);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        Livro book = Mockito.mock(Livro.class);
+
+        when(expectedResponse.merge(book)).thenReturn(book);
+        when(instance.salvar(book)).thenReturn(book);
+
+        Livro result = instance.salvar(book);
+
+        assertEquals(expectedResponse.merge(book), result);
+
+        Mockito.verify(instance, Mockito.times(1)).salvar(book);
     }
 
     /**
-     * Test of excluir method, of class LivroDAO.
+     * Test of {@link LivroDAOTest#testExcluir()}.
+     *
+     * This test verifies that the `testExcluir` method of the `LivroDAOTest`
+     * class creates a new user and returns the expected response.
+     *
      */
     @Test
     public void testExcluir() {
-//        System.out.println("excluir");
-//        Long id = null;
-//        LivroDAO instance = null;
-//        instance.excluir(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        /**
+         * Criando o objeto manualmente nesse caso tive que criar o objecto dao
+         * pois a função não retorna tipos, e neste caso não consegui usar o
+         * Mockito.when().
+         */
+        LivroDAO livroDAO = new LivroDAO(expectedResponse);
+
+        Long bookId = 1L;
+        Livro book = new Livro("titulo", "autor", 1);
+        book.setId(bookId);
+
+        when(expectedResponse.find(Livro.class, bookId)).thenReturn(book);
+
+        livroDAO.excluir(bookId);
+
+        verify(expectedResponse, Mockito.times(1)).find(Livro.class, bookId);
+        verify(expectedResponse, Mockito.times(1)).remove(book);
     }
 
     /**
-     * Test of consultarPorId method, of class LivroDAO.
+     * Test of {@link LivroDAOTest#testConsultarPorId()}.
+     *
+     * This test verifies that the `testConsultarPorId` method of the
+     * `LivroDAOTest` class creates a new user and returns the expected
+     * response.
+     *
      */
     @Test
     public void testConsultarPorId() {
-//        System.out.println("consultarPorId");
-//        Long id = null;
-//        LivroDAO instance = null;
-//        Livro expResult = null;
-//        Livro result = instance.consultarPorId(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        Livro book = Mockito.mock(Livro.class);
+        Long id = 1L;
+
+        when(instance.consultarPorId(id)).thenReturn(book);
+        when(expectedResponse.find(Livro.class, id)).thenReturn(book);
+
+        Livro result = instance.consultarPorId(id);
+
+        assertEquals(expectedResponse.find(Livro.class, id), result);
+
+        verify(instance, Mockito.times(1)).consultarPorId(id);
+        verify(expectedResponse).find(Livro.class, id);
     }
 
     /**
-     * Test of consultarPorTitulo method, of class LivroDAO.
+     * Test of {@link LivroDAOTest#testConsultarPorTitulo()}.
+     *
+     * This test verifies that the `testConsultarPorNome` method of the
+     * `LivroDAOTest` class creates a new user and returns the expected
+     * response.
+     *
      */
     @Test
     public void testConsultarPorTitulo() {
-//        System.out.println("consultarPorTitulo");
-//        String titulo = "";
-//        LivroDAO instance = null;
-//        List<Livro> expResult = null;
-//        List<Livro> result = instance.consultarPorTitulo(titulo);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        String titulo = "titulo";
+        List<Livro> expectedBooks = new ArrayList<>();
+        Livro book = Mockito.mock(Livro.class);
+        expectedBooks.add(book);
+
+        when(instance.consultarPorTitulo(titulo)).thenReturn(expectedBooks);
+
+        List<Livro> result = instance.consultarPorTitulo(titulo);
+
+        assertEquals(expectedBooks, result);
+
+        verify(instance, Mockito.times(1)).consultarPorTitulo(titulo);
     }
-    
+
 }
