@@ -34,3 +34,7 @@ replay_pid*
 /biblioteca-ejb/
 /biblioteca-ear/
 /docker/wildfly/
+/war-module/target/
+/jar-module/target/
+/bibliotecal-jar/target/
+/biblioteca-jar/target/

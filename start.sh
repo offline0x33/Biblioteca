@@ -3,6 +3,9 @@
 # Limpa e empacota o projeto Maven
 mvn clean package
 
+# Gerar o JAR
+#mvn clean package -f jar-module/pom.xml
+
 # Obtém o diretório atual e armazena em DIR
 DIR=$(pwd)
 
