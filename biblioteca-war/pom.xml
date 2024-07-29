@@ -2,9 +2,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bajo</groupId>
-    <artifactId>biblioteca-jar</artifactId>
+    <artifactId>biblioteca-war</artifactId>
     <version>1.0.17</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>biblioteca-1.0.17</name>
 
     <properties>
@@ -184,7 +184,7 @@
 
     <build>
         <!--        Compilar diretorio acima-->
-            <sourceDirectory>../biblioteca-war/src/main/java</sourceDirectory>
+            <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

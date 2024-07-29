@@ -16,7 +16,7 @@ cd $DIR/docker
 yes | sudo rm -R db
 
 # Copia o arquivo WAR gerado para o diretório do Docker
-cp $DIR/target/biblioteca-1.0-SNAPSHOT.war $DIR/docker
+cp $DIR/biblioteca-war/target/biblioteca-war-1.0.17.war $DIR/docker
 
 # Derruba os contêineres e remove as imagens
 docker-compose down --rmi all
