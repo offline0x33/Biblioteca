@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  * tanto no lado do servidor quanto no lado do cliente. Tenha em mente que os
  * filtros são sempre executados, independentemente de o recurso ter sido
  * encontrado ou não.</p>
- * 
+ *
  * <p>
  * Implementando o ContainerRequestFilter interface e registrá-lo como um
  * Provedor em nossa api Rest. Caso queiramos executar um filtro antes da
@@ -123,8 +123,11 @@ public class AuthInterceptor extends TokenValidator implements ContainerRequestF
                     abortWithUnauthorized(requestContext);
                 }
             } else {
-
-                throw new NotAuthorizedException("Bearer error=\"invalid_token\"");
+                if ("auth".equals(path[1])) {
+                    Response.accepted();
+                } else {
+                    throw new NotAuthorizedException("Bearer error=\"invalid_token\"");
+                }
             }
         }
         Response.accepted();

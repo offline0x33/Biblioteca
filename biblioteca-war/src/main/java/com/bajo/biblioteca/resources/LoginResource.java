@@ -4,7 +4,6 @@
  */
 package com.bajo.biblioteca.resources;
 
-import com.bajo.biblioteca.bean.UserBean;
 import com.bajo.biblioteca.dao.UserDAO;
 import com.bajo.biblioteca.model.User;
 import com.bajo.biblioteca.auth.jwt.TokenGenerator;

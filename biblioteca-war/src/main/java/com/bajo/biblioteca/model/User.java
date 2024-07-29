@@ -60,6 +60,10 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
+    // Default constructor
+    public User() {
+    }
+
     public User(String username, String password, String email, String authorities) {
         this.username = username;
         this.password = password;

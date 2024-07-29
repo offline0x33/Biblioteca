@@ -4,8 +4,8 @@
  */
 package com.bajo.biblioteca.auth.jwt.util;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
-
 
 /**
  * Represents a user's login credentials for authentication.
@@ -20,12 +20,18 @@ public class Login implements Serializable {
     /**
      * User's email address.
      */
+    @JsonProperty("email")
     private String email;
 
     /**
      * User's password.
      */
+    @JsonProperty("password")
     private String password;
+
+    // Default constructor
+    public Login() {
+    }
 
     /**
      * Constructor to initialize the login credentials.
