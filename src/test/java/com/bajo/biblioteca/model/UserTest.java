@@ -12,19 +12,37 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
+ * Classe de teste unitário para a entidade {@link User}.
+ *
+ * Esta classe contém testes para verificar a funcionalidade do construtor da
+ * classe `User`, garantindo que os atributos sejam inicializados corretamente.
  *
  * @author bajinho
- * @created 2024-07028
+ * @since 2024-07-28
  */
 @ExtendWith(MockitoExtension.class)
 public class UserTest {
 
+    /**
+     * This field stores a reference to a {@link User} object used in the tests.
+     */
     private User user;
+
+    /**
+     * These fields store test data for username, password, email, and
+     * authorities.
+     */
     private String username;
     private String password;
     private String email;
     private String authorities;
 
+    /**
+     * Configura os dados de teste antes de cada método de teste.
+     *
+     * Cria um novo objeto `User` com valores de teste para os atributos
+     * `username`, `password`, `email` e `authorities`.
+     */
     @BeforeEach
     public void setUp() {
         username = "test_user";
@@ -34,6 +52,13 @@ public class UserTest {
         user = new User(username, password, email, authorities);
     }
 
+    /**
+     * Verifica se o construtor da classe `User` inicializa corretamente todos
+     * os atributos.
+     *
+     * Este teste também demonstra o uso do Mockito para criar um objeto mock e
+     * verificar o comportamento esperado.
+     */
     @Test
     public void testUserConstructor_setsAllFieldsCorrectly() {
         // Mockito is not strictly necessary for this simple test, 
