@@ -37,9 +37,6 @@ public class UserDAO {
      * @throws java.lang.Exception
      */
     public User salvar(User user) throws Exception {
-        System.out.println("Salvando o usuário: "
-                + user.getUsername());
-
         /* Verifica se a pessoa ainda não está salva no 
       banco de dados. */
         if (user.getId() == null) {

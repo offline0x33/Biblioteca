@@ -34,6 +34,7 @@ services:
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=supersecret
+      - MYSQL_ROOT_HOST=localhost
       - HOST_CACHE_SIZE=0
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql

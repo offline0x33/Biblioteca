@@ -3,14 +3,17 @@
 # Limpa e empacota o projeto Maven
 mvn clean package
 
+# Obtém o diretório atual e armazena em DIR
+DIR=$(pwd)
+
 # Navega até o diretório do Docker
-cd $HOME/NetBeansProjects/Biblioteca/docker
+cd $DIR/docker
 
 # Remove o diretório 'db'
 yes | sudo rm -R db
 
 # Copia o arquivo WAR gerado para o diretório do Docker
-cp $HOME/NetBeansProjects/Biblioteca/target/biblioteca-1.0-SNAPSHOT.war $HOME/NetBeansProjects/Biblioteca/docker
+cp $DIR/target/biblioteca-1.0-SNAPSHOT.war $DIR/docker
 
 # Derruba os contêineres e remove as imagens
 docker-compose down --rmi all

@@ -140,6 +140,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bajo.biblioteca.model.User[ id=" + id + username + email + " ]";
+        return "com.bajo.biblioteca.model.User[ id=" + id + username + email + authorities + " ]";
     }
 }
