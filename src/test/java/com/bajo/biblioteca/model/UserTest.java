@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
  * classe `User`, garantindo que os atributos sejam inicializados corretamente.
  *
  * @author bajinho
- * @since 2024-07-28
+ * @created 2024-07-28
  */
 @ExtendWith(MockitoExtension.class)
 public class UserTest {
