@@ -74,6 +74,11 @@ public class Group implements Serializable {
     public Group(String name){
         this.name = name;
     }   
+
+    public Group(String name, String username) {
+        this.name = name;
+        this.username = username;
+    }
     
     // ... getter and setter methods for id, name, and username ...
     public Long getId() {

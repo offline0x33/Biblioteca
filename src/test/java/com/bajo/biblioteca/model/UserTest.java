@@ -45,11 +45,11 @@ public class UserTest {
      */
     @BeforeEach
     public void setUp() {
-        username = "test_user";
-        password = "secret";
-        email = "test@example.com";
-        authorities = "ROLE_USER";
-        user = new User(username, password, email, authorities);
+        this.username = "test_user";
+        this.password = "secret";
+        this.email = "test@example.com";
+        this.authorities = "ROLE_USER";
+        this.user = new User(username, password, email, authorities);
     }
 
     /**
