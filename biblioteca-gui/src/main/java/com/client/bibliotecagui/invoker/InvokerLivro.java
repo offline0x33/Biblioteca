@@ -25,7 +25,7 @@ public class InvokerLivro {
     public static LivroRemote invokeLivroStatelessBean() {
         try {
             InitialContext context = Invoker.getContext();
-            return (LivroRemote) context.lookup("ejb:/biblioteca-1.0-SNAPSHOT/LivroBean!"
+            return (LivroRemote) context.lookup("ejb:/biblioteca-war-1.0.17/LivroBean!"
                     + LivroRemote.class.getName());
         } catch (NamingException e) {
             System.out.println("ERROR!: " + e);

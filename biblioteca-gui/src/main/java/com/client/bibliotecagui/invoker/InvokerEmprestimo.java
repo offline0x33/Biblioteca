@@ -25,7 +25,7 @@ public class InvokerEmprestimo {
     public static EmprestimoRemote invokeEmprestimoStatelessBean() {
         try {
             InitialContext context = Invoker.getContext();
-            return (EmprestimoRemote) context.lookup("ejb:/biblioteca-1.0-SNAPSHOT/EmprestimoBean!"
+            return (EmprestimoRemote) context.lookup("ejb:/biblioteca-war-1.0.17/EmprestimoBean!"
                     + EmprestimoRemote.class.getName());
         } catch (NamingException e) {
             System.out.println("ERROR!: " + e);

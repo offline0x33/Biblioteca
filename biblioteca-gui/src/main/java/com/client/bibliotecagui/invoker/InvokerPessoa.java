@@ -25,7 +25,7 @@ public class InvokerPessoa {
     public static PessoaRemote invokePessoaStatelessBean() {
         try {
             InitialContext context = Invoker.getContext();
-            return (PessoaRemote) context.lookup("ejb:/biblioteca-1.0-SNAPSHOT/PessoaBean!"
+            return (PessoaRemote) context.lookup("ejb:/biblioteca-war-1.0.17/PessoaBean!"
                     + PessoaRemote.class.getName());
         } catch (NamingException e) {
             System.out.println("ERROR!: " + e);
