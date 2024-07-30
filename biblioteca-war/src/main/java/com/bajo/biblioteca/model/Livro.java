@@ -16,6 +16,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Represents a book entity in a library management system.
@@ -77,6 +79,21 @@ public class Livro implements Serializable {
     @Column(name = "emprestado", nullable = false)
     private int emprestado;
 
+    @Column(name = "isbn")
+    private String isbn;
+
+    @Column(name = "dataPublicacao")
+    private Date dataPublicacao;
+
+    @Column(name = "preco", precision = 10, scale = 2)
+    private BigDecimal preco;
+
+    @Column(name = "moeda", length = 3)
+    private String moeda;
+
+    @Column(name = "desconto", precision = 10, scale = 2)
+    private BigDecimal desconto;
+
     public Livro() {
     }
 
@@ -117,6 +134,46 @@ public class Livro implements Serializable {
 
     public void setEmprestado(int emprestado) {
         this.emprestado = emprestado;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Date getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(Date dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public String getMoeda() {
+        return moeda;
+    }
+
+    public void setMoeda(String moeda) {
+        this.moeda = moeda;
+    }
+
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
     }
 
     /**
